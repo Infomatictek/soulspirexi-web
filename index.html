@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOULSPIRE XI — A Reimagined Vana'diel</title>
+  <meta name="description" content="Shatter the limits of classic Final Fantasy XI with sixty-six Soul Crystals, modern tools, and a welcoming realm built for veterans and newcomers alike." />
+  <meta name="theme-color" content="#080C15" />
+
+  <!-- OpenGraph / Discord Embed -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://soulspirexi.com" />
+  <meta property="og:title" content="Soulspire XI — A Reimagined Vana'diel" />
+  <meta property="og:description" content="Shatter the limits of classic Final Fantasy XI with sixty-six Soul Crystals, modern tools, and a welcoming realm built for veterans and newcomers alike." />
+  <meta property="og:image" content="https://soulspirexi.com/assets/soulspire-icon.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://soulspirexi.com" />
+  <meta name="twitter:title" content="Soulspire XI — A Reimagined Vana'diel" />
+  <meta name="twitter:description" content="Shatter the limits of classic Final Fantasy XI with sixty-six Soul Crystals, modern tools, and a welcoming realm built for veterans and newcomers alike." />
+  <meta name="twitter:image" content="https://soulspirexi.com/assets/soulspire-icon.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="./assets/soulspire-icon.png" />
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="./assets/soulspire-icon.png" />
+
+  <!-- Google Fonts: Cinzel (Cinematic Serif), Plus Jakarta Sans (Welcoming Body), JetBrains Mono (Subtle Metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            abyss: '#080C15',
+            midnight: '#0D1321',
+            midnightCard: '#111829',
+            aether: {
+              cyan: '#38E8FF',
+              cyanSoft: '#22D3EE',
+              gold: '#F5C26B',
+              goldDeep: '#E5A94C',
+              violet: '#9D7BFF',
+              violetDeep: '#7C3AED',
+            },
+            stoneIvory: '#E8E2D5',
+            stoneMuted: '#B8B0A0',
+            slateSilver: '#94A3B8',
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Dark-Fantasy Styling: Carved Stone Borders, Dual-Aether Lighting & Motion -->
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: #080C15;
+      color: #E8E2D5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle atmospheric texture overlay */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Ivory-to-Celestial-Gold metallic title gradient */
+    .text-ivory-gold {
+      background: linear-gradient(180deg, #FBF8F1 0%, #E8E2D5 38%, #F5C26B 76%, #C88C32 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Dual-tone cyan-to-gold hairline divider */
+    .dual-aether-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(56, 232, 255, 0.45) 30%, rgba(157, 123, 255, 0.35) 50%, rgba(245, 194, 107, 0.5) 70%, transparent 100%);
+    }
+
+    /* Carved Stone & Midnight Glass Panel */
+    .crag-panel {
+      background: linear-gradient(180deg, rgba(17, 24, 41, 0.84) 0%, rgba(10, 15, 27, 0.94) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(232, 226, 213, 0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(232, 226, 213, 0.1),
+        inset 0 0 28px rgba(4, 7, 14, 0.65),
+        0 20px 50px -18px rgba(0, 0, 0, 0.85);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    }
+
+    .crag-panel-hover:hover {
+      border-color: rgba(245, 194, 107, 0.38);
+      box-shadow:
+        inset 0 1px 0 rgba(245, 194, 107, 0.2),
+        0 24px 55px -16px rgba(0, 0, 0, 0.92),
+        0 0 32px -12px rgba(56, 232, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    /* Primary Molten Gold CTA Button */
+    .btn-molten-gold {
+      position: relative;
+      background: linear-gradient(180deg, #F8D58E 0%, #F5C26B 48%, #D69234 100%);
+      color: #080C15;
+      border: 1px solid #FCE8B8;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.55),
+        0 0 28px -4px rgba(245, 194, 107, 0.45),
+        0 12px 28px -8px rgba(0, 0, 0, 0.8);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow: hidden;
+    }
+
+    .btn-molten-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 22%, rgba(255, 255, 255, 0.42) 50%, transparent 78%);
+      transform: translateX(-125%);
+      transition: transform 0.65s ease;
+    }
+
+    .btn-molten-gold:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        0 0 38px -2px rgba(245, 194, 107, 0.65),
+        0 16px 32px -8px rgba(0, 0, 0, 0.88);
+    }
+
+    .btn-molten-gold:hover::before {
+      transform: translateX(125%);
+    }
+
+    /* Secondary Frosted Glass Button */
+    .btn-aether-glass {
+      background: linear-gradient(180deg, rgba(20, 29, 49, 0.78) 0%, rgba(11, 16, 29, 0.9) 100%);
+      border: 1px solid rgba(232, 226, 213, 0.2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 28px -10px rgba(0, 0, 0, 0.78);
+      transition: all 0.25s ease;
+    }
+
+    .btn-aether-glass:hover {
+      border-color: rgba(56, 232, 255, 0.55);
+      background: linear-gradient(180deg, rgba(24, 38, 64, 0.88) 0%, rgba(12, 19, 34, 0.94) 100%);
+      box-shadow: inset 0 1px 0 rgba(56, 232, 255, 0.2), 0 0 28px -6px rgba(56, 232, 255, 0.32);
+      transform: translateY(-1px);
+    }
+
+    /* Floating Crystal Shard Animations */
+    @keyframes shardFloatA {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-11px) rotate(1.5deg); }
+    }
+
+    @keyframes shardFloatB {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(-2deg); }
+    }
+
+    @keyframes shardFloatC {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes aetherBreath {
+      0%, 100% { opacity: 0.72; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0% { transform: translateY(0); opacity: 0; }
+      30% { opacity: 1; }
+      80% { transform: translateY(11px); opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes emblemFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-7px) scale(1.015); }
+    }
+
+    .animate-aether-breath { animation: aetherBreath 4.6s ease-in-out infinite; }
+    .animate-scroll-dot { animation: scrollPulse 2.3s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    .animate-emblem-float { animation: emblemFloat 6.5s ease-in-out infinite; }
+
+    /* Seamless radial edge-blend for the 1-for-1 Hero Spire emblem */
+    .hero-emblem-mask {
+      -webkit-mask-image: radial-gradient(circle at center, black 58%, transparent 96%);
+      mask-image: radial-gradient(circle at center, black 58%, transparent 96%);
+    }
+
+    /* Smooth Scroll-Triggered Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Panel Crossfade */
+    .fade-swap {
+      animation: fadeSwap 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes fadeSwap {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #080C15; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #F5C26B; }
+  </style>
+</head>
+<body class="antialiased selection:bg-aether-cyan/25 selection:text-stoneIvory">
+  <!-- Subtle ambient grain -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. STICKY NAVIGATION BAR                                              -->
+  <!-- ===================================================================== -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Left: Shattered Crag Emblem + Wordmark -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
+        <div class="relative w-10 h-10 flex items-center justify-center shrink-0">
+          <div class="absolute inset-0 bg-gradient-to-tr from-aether-cyan/25 via-aether-violet/20 to-aether-gold/25 blur-md rounded-full opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative z-10 w-10 h-10 rounded-lg overflow-hidden border border-aether-gold/40 bg-abyss shadow-[0_0_16px_-4px_rgba(56,232,255,0.35)] group-hover:border-aether-gold/75 transition-colors">
+            <img
+              src="./assets/soulspire-icon.png"
+              alt="Soulspire XI Emblem"
+              class="w-full h-full object-cover"
+              onerror="this.onerror=null;this.src='https://placehold.co/80x80/080C15/F5C26B?text=XI';"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel font-bold text-lg sm:text-xl tracking-[0.2em] text-ivory-gold leading-none">SOULSPIRE XI</span>
+          <span class="font-mono text-[10px] tracking-[0.24em] text-slateSilver/75 uppercase mt-1 hidden sm:block">A Reimagined Vana'diel</span>
+        </div>
+      </a>
+
+      <!-- Center: Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Primary Navigation">
+        <a href="#sundering" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">The Sundering</a>
+        <a href="#shards" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">The 66 Shards</a>
+        <a href="#perspectives" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">New &amp; Returning</a>
+        <a href="#play" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">Play</a>
+      </nav>
+
+      <!-- Right: Realm Online Badge + Primary CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-midnight/85 border border-aether-cyan/25">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-aether-cyan opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-aether-cyan"></span>
+          </span>
+          <span class="font-mono text-[10px] font-medium tracking-[0.18em] text-aether-cyan uppercase">Realm Online</span>
+        </div>
+
+        <button type="button" onclick="openOnboardingModal()" class="btn-molten-gold px-5 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.15em] uppercase cursor-pointer">
+          Begin Your Journey
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" class="lg:hidden p-2.5 rounded-md border border-stoneIvory/20 bg-midnight/85 text-stoneIvory hover:border-aether-gold/50 transition-colors cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <!-- Dual-Aether Scroll Hairline (revealed via JS) -->
+    <div id="navbar-hairline" class="dual-aether-line opacity-0 transition-opacity duration-300"></div>
+  </header>
+
+  <!-- Mobile Slide-Out Drawer -->
+  <div id="mobile-backdrop" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" onclick="closeMobileMenu()"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-72 max-w-[85vw] bg-midnight border-l border-stoneIvory/15 transform translate-x-full transition-transform duration-300 ease-out flex flex-col p-6 shadow-2xl">
+    <div class="flex items-center justify-between pb-5 border-b border-stoneIvory/10">
+      <span class="font-cinzel font-bold tracking-[0.2em] text-ivory-gold text-base">SOULSPIRE XI</span>
+      <button type="button" onclick="closeMobileMenu()" aria-label="Close menu" class="p-2 rounded-md text-slateSilver hover:text-stoneIvory hover:bg-white/5 cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="mt-5 mb-6 flex items-center gap-2.5 px-3 py-2 rounded-md bg-abyss/85 border border-aether-cyan/25">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-aether-cyan opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-aether-cyan"></span>
+      </span>
+      <span class="font-mono text-[11px] tracking-[0.16em] text-aether-cyan uppercase">Realm Online</span>
+    </div>
+
+    <nav class="flex flex-col gap-2 flex-1">
+      <a href="#sundering" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">The Sundering</a>
+      <a href="#shards" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">The 66 Shards</a>
+      <a href="#perspectives" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">New &amp; Returning</a>
+      <a href="#play" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">Play</a>
+    </nav>
+
+    <div class="pt-5 border-t border-stoneIvory/10">
+      <button type="button" onclick="closeMobileMenu(); openOnboardingModal();" class="btn-molten-gold w-full py-3 rounded-md font-cinzel text-xs font-bold tracking-[0.15em] uppercase cursor-pointer">
+        Begin Your Journey
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===================================================================== -->
+  <!-- 2. FULL-VIEWPORT CINEMATIC HERO (100vh)                               -->
+  <!-- ===================================================================== -->
+  <section id="hero" class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-24 pb-16 px-4 sm:px-6">
+    <!-- Dual-Aether Ambient Backlighting (Left Cyan, Center Violet, Right Gold) -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-[22%] left-[20%] w-[44vw] max-w-[540px] h-[52vh] rounded-full bg-aether-cyan/12 blur-[120px] animate-aether-breath"></div>
+      <div class="absolute top-[22%] right-[18%] w-[44vw] max-w-[540px] h-[52vh] rounded-full bg-aether-gold/12 blur-[120px] animate-aether-breath"></div>
+      <div class="absolute top-[12%] left-1/2 -translate-x-1/2 w-[38vw] max-w-[460px] h-[44vh] rounded-full bg-aether-violet/15 blur-[110px]"></div>
+    </div>
+
+    <!-- Ambient Dual-Tone Aether Ember Canvas -->
+    <canvas id="aether-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+    <!-- Bottom Vignette Fade -->
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-abyss via-abyss/80 to-transparent pointer-events-none z-10"></div>
+
+    <!-- Hero Content Composition -->
+    <div class="relative z-20 max-w-5xl mx-auto flex flex-col items-center text-center">
+      <!-- 1-for-1 Official Soulspire XI Emblem Centerpiece -->
+      <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[350px] md:h-[350px] mb-4 sm:mb-6 select-none flex items-center justify-center">
+        <!-- Ambient Dual-Aether (Cyan & Gold) Outer Radial Glow behind the Emblem -->
+        <div class="absolute -inset-4 rounded-full bg-[radial-gradient(circle_at_35%_45%,rgba(56,232,255,0.22)_0%,transparent_58%),radial-gradient(circle_at_68%_50%,rgba(245,194,107,0.2)_0%,transparent_58%),radial-gradient(circle_at_50%_30%,rgba(157,123,255,0.16)_0%,transparent_65%)] blur-2xl animate-aether-breath pointer-events-none" aria-hidden="true"></div>
+
+        <div class="relative z-10 w-full h-full animate-emblem-float">
+          <img
+            src="./assets/soulspire-icon.png"
+            alt="Soulspire XI Shattered Spire Emblem"
+            class="w-full h-full object-contain hero-emblem-mask drop-shadow-[0_18px_42px_rgba(0,0,0,0.9)]"
+            onerror="this.onerror=null;this.src='https://placehold.co/360x360/080C15/F5C26B?text=SOULSPIRE+XI';"
+          />
+        </div>
+      </div>
+
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-3 mb-4">
+        <span class="w-8 sm:w-14 h-[1px] bg-gradient-to-r from-transparent to-aether-cyan/75"></span>
+        <span class="font-mono text-[11px] sm:text-xs font-medium tracking-[0.32em] uppercase text-aether-cyan">
+          A Reimagined Vana'diel
+        </span>
+        <span class="w-8 sm:w-14 h-[1px] bg-gradient-to-l from-transparent to-aether-gold/75"></span>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="font-cinzel font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-[0.18em] leading-[1.08] text-ivory-gold drop-shadow-[0_12px_32px_rgba(0,0,0,0.9)] mb-5">
+        SOULSPIRE XI
+      </h1>
+
+      <!-- Accessible, Evocative Subheadline -->
+      <p class="max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-stoneIvory/85 font-light leading-relaxed mb-9">
+        The ancient Crags have shattered. Awaken forgotten champions, forge your own path across twenty-two classic jobs, and experience a timeless fantasy world reborn.
+      </p>
+
+      <!-- Dual Hero CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+        <button type="button" onclick="openOnboardingModal()" class="btn-molten-gold w-full sm:w-auto min-w-[235px] px-8 py-4 rounded-md font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase cursor-pointer">
+          Download Launcher
+        </button>
+
+        <button type="button" onclick="copyDiscordInvite()" class="btn-aether-glass w-full sm:w-auto min-w-[235px] px-7 py-4 rounded-md flex items-center justify-center gap-3 text-stoneIvory cursor-pointer">
+          <svg class="w-5 h-5 text-aether-cyan shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span class="font-cinzel text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase">Join the Community</span>
+        </button>
+      </div>
+
+      <!-- Subtle Living World Note -->
+      <div class="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-[11px] tracking-[0.2em] uppercase text-slateSilver/75">
+        <span>Living World</span>
+        <span class="text-aether-gold/60">&diams;</span>
+        <span>Evolving Systems</span>
+        <span class="text-aether-cyan/60">&diams;</span>
+        <span>Free Fan Project</span>
+      </div>
+    </div>
+
+    <!-- Scroll Prompt -->
+    <a href="#sundering" aria-label="Scroll to The Sundering lore" class="mt-10 sm:mt-12 relative z-20 flex flex-col items-center gap-2 group">
+      <span class="font-mono text-[10px] tracking-[0.28em] uppercase text-slateSilver/65 group-hover:text-aether-gold transition-colors">Discover the Lore</span>
+      <div class="w-5 h-8 rounded-full border border-stoneIvory/25 flex justify-center pt-1.5">
+        <div class="w-1 h-2 rounded-full bg-aether-cyan animate-scroll-dot"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. THE LORE: THE SUNDERING OF THE SPIRES                              -->
+  <!-- ===================================================================== -->
+  <section id="sundering" class="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Heading -->
+      <div class="max-w-3xl mb-14 reveal">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="font-mono text-xs tracking-[0.28em] uppercase text-aether-gold">Chronicle I &bull; World Lore</span>
+          <span class="h-[1px] w-16 bg-gradient-to-r from-aether-gold/70 to-transparent"></span>
+        </div>
+        <h2 class="font-cinzel font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[0.12em] uppercase text-ivory-gold mb-4">
+          The Sundering of the Spires
+        </h2>
+        <p class="text-slateSilver text-sm sm:text-base leading-relaxed">
+          Whether this is your first step onto Vana'diel's soil or a return to a beloved homeland, the world has changed—and ancient echoes now answer your call.
+        </p>
+      </div>
+
+      <!-- Two-Column Storytelling + Interactive Five Crags Resonance Card -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <!-- Left Column: Three Digestible Lore Beats -->
+        <div class="lg:col-span-7 space-y-6 reveal">
+          <!-- Beat 1: The Cataclysm -->
+          <article class="crag-panel rounded-xl p-6 sm:p-7 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aether-cyan via-aether-violet to-transparent"></div>
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="font-mono text-[11px] tracking-[0.22em] uppercase text-aether-cyan">01 &bull; The Cataclysm</span>
+            </div>
+            <h3 class="font-cinzel font-bold text-xl tracking-[0.08em] text-stoneIvory mb-3">When the Ancient Crags Fractured</h3>
+            <p class="text-sm sm:text-base text-slateSilver leading-relaxed">
+              Across Vana'diel, the five ancient Crags—<span class="text-stoneIvory">Holla, Dem, Mea, Vahzl, and Al'Taieu</span>—were built to anchor the Mothercrystals and safeguard the flow of life energy. During a silent, celestial tremor known as <em class="text-aether-gold not-italic font-medium">the Sundering</em>, their upper conduits fractured into towering, resonant monoliths of raw aether: <strong class="text-stoneIvory font-semibold">the Soulspires</strong>.
+            </p>
+          </article>
+
+          <!-- Beat 2: The Sixty-Six Shards -->
+          <article class="crag-panel rounded-xl p-6 sm:p-7 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aether-violet via-aether-gold to-transparent"></div>
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="font-mono text-[11px] tracking-[0.22em] uppercase text-aether-violet">02 &bull; The Sixty-Six Shards</span>
+            </div>
+            <h3 class="font-cinzel font-bold text-xl tracking-[0.08em] text-stoneIvory mb-3">Memories of Forgotten Champions</h3>
+            <p class="text-sm sm:text-base text-slateSilver leading-relaxed">
+              When the Spires shattered, they did not release empty magic—they unleashed the crystallized memories, combat arts, and unbroken wills of <span class="text-stoneIvory font-medium">sixty-six forgotten champions</span> from Vana'diel's lost ages. Raining across the continents, these shards hardened into <strong class="text-aether-cyan font-semibold">Soul Crystals</strong>, offering three distinct paths attuned to each of the twenty-two classic disciplines of war and magic.
+            </p>
+          </article>
+
+          <!-- Beat 3: The Adventurer's Calling -->
+          <article class="crag-panel rounded-xl p-6 sm:p-7 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aether-gold via-aether-cyan to-transparent"></div>
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="font-mono text-[11px] tracking-[0.22em] uppercase text-aether-gold">03 &bull; The Adventurer's Calling</span>
+            </div>
+            <h3 class="font-cinzel font-bold text-xl tracking-[0.08em] text-stoneIvory mb-3">Awaken What Lies Dormant</h3>
+            <p class="text-sm sm:text-base text-slateSilver leading-relaxed">
+              To socket a Soul Crystal is to invite a forgotten champion's spirit into your own—opening new ways to wield steel, weave spells, and stand beside your allies. As the realm's creatures grow fiercer in the wake of the aether surge, adventurers must seek out these shards and master their dormant arts before darkness consumes the land.
+            </p>
+          </article>
+        </div>
+
+        <!-- Right Column: Interactive "Five Crags Resonance" Card -->
+        <div class="lg:col-span-5 reveal">
+          <div class="crag-panel rounded-xl p-6 sm:p-7 border-stoneIvory/20 relative">
+            <!-- Subtle Carved Stone Corner Accents -->
+            <span class="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-aether-cyan/60"></span>
+            <span class="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-aether-gold/60"></span>
+            <span class="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-aether-cyan/60"></span>
+            <span class="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-aether-gold/60"></span>
+
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="font-mono text-[11px] tracking-[0.24em] uppercase text-aether-cyan">Five Crags Resonance</span>
+              <span class="font-mono text-[10px] text-slateSilver/75">Select a Crag</span>
+            </div>
+            <h3 class="font-cinzel font-bold text-2xl tracking-[0.1em] text-ivory-gold mb-2">Whispers of the Sundering</h3>
+            <p class="text-xs sm:text-sm text-slateSilver mb-6">
+              Attune to each fractured Crag to sense the echoes drifting across Vana'diel.
+            </p>
+
+            <!-- Interactive Crag Selector Pills -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2.5 mb-6" role="tablist" aria-label="Five Crags of Vana'diel">
+              <button type="button" data-crag="holla" onclick="selectCrag('holla')" onmouseenter="selectCrag('holla')"
+                class="crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer">
+                <span class="font-cinzel text-xs font-bold tracking-[0.14em] uppercase block">Holla</span>
+                <span class="font-mono text-[10px] opacity-75">La Theine Plateau</span>
+              </button>
+              <button type="button" data-crag="dem" onclick="selectCrag('dem')" onmouseenter="selectCrag('dem')"
+                class="crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer">
+                <span class="font-cinzel text-xs font-bold tracking-[0.14em] uppercase block">Dem</span>
+                <span class="font-mono text-[10px] opacity-75">Konschtat Highlands</span>
+              </button>
+              <button type="button" data-crag="mea" onclick="selectCrag('mea')" onmouseenter="selectCrag('mea')"
+                class="crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer">
+                <span class="font-cinzel text-xs font-bold tracking-[0.14em] uppercase block">Mea</span>
+                <span class="font-mono text-[10px] opacity-75">Tahrongi Canyon</span>
+              </button>
+              <button type="button" data-crag="vahzl" onclick="selectCrag('vahzl')" onmouseenter="selectCrag('vahzl')"
+                class="crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer">
+                <span class="font-cinzel text-xs font-bold tracking-[0.14em] uppercase block">Vahzl</span>
+                <span class="font-mono text-[10px] opacity-75">Xarcabard</span>
+              </button>
+              <button type="button" data-crag="altaieu" onclick="selectCrag('altaieu')" onmouseenter="selectCrag('altaieu')"
+                class="crag-btn col-span-2 sm:col-span-2 lg:col-span-2 px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer">
+                <span class="font-cinzel text-xs font-bold tracking-[0.14em] uppercase block">Al'Taieu</span>
+                <span class="font-mono text-[10px] opacity-75">The Celestial Capital</span>
+              </button>
+            </div>
+
+            <!-- Poetic Lore Whisper Display -->
+            <div id="crag-whisper-box" class="rounded-lg bg-abyss/90 border border-stoneIvory/15 p-5 min-h-[155px] flex flex-col justify-between">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 4. THE THREE CALLINGS: ECHOES OF SIXTY-SIX CHAMPIONS                  -->
+  <!-- ===================================================================== -->
+  <section id="shards" class="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10 bg-[radial-gradient(ellipse_at_top,rgba(157,123,255,0.08),transparent_62%)]">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+        <span class="font-mono text-xs tracking-[0.3em] uppercase text-aether-violet block mb-3">The Sixty-Six Shards</span>
+        <h2 class="font-cinzel font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[0.12em] uppercase text-ivory-gold mb-4">
+          Echoes of Sixty-Six Champions
+        </h2>
+        <p class="text-slateSilver text-sm sm:text-base leading-relaxed">
+          Every one of Vana'diel's twenty-two classic jobs can branch into three distinct thematic identities. Explore the three great callings shaping our living realm.
+        </p>
+      </div>
+
+      <!-- Three Interactive Calling Tabs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 reveal" role="tablist" aria-label="Three Champion Callings">
+        <button type="button" role="tab" data-calling="vanguard" onclick="selectCalling('vanguard')"
+          class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-gold">Calling I &bull; 18 Shards</span>
+            <span class="w-2.5 h-2.5 rotate-45 bg-aether-gold"></span>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Vanguard &amp; Bastions</h3>
+          <p class="text-xs text-slateSilver">Unyielding protectors &amp; frontline stalwarts</p>
+        </button>
+
+        <button type="button" role="tab" data-calling="strikers" onclick="selectCalling('strikers')"
+          class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-cyan">Calling II &bull; 21 Shards</span>
+            <span class="w-2.5 h-2.5 rotate-45 bg-aether-cyan"></span>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Unbound Strikers</h3>
+          <p class="text-xs text-slateSilver">Relentless blades &amp; arcane conduits</p>
+        </button>
+
+        <button type="button" role="tab" data-calling="tacticians" onclick="selectCalling('tacticians')"
+          class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-violet">Calling III &bull; 27 Shards</span>
+            <span class="w-2.5 h-2.5 rotate-45 bg-aether-violet"></span>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Tacticians &amp; Menders</h3>
+          <p class="text-xs text-slateSilver">Battlefield conductors &amp; life-weavers</p>
+        </button>
+      </div>
+
+      <!-- Dynamic Calling Preview Panel -->
+      <div id="calling-preview-panel" class="crag-panel rounded-2xl p-6 sm:p-9 lg:p-10 reveal">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 5. BUILT FOR VETERANS & NEWCOMERS ALIKE (DUAL-PERSPECTIVE SECTION)    -->
+  <!-- ===================================================================== -->
+  <section id="perspectives" class="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+        <span class="font-mono text-xs tracking-[0.28em] uppercase text-aether-cyan block mb-3">A Realm for Everyone</span>
+        <h2 class="font-cinzel font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[0.12em] uppercase text-ivory-gold mb-4">
+          Built for Veterans &amp; Newcomers Alike
+        </h2>
+        <p class="text-slateSilver text-sm sm:text-base leading-relaxed">
+          Wondering if Soulspire XI is right for you? Whether you have never played Final Fantasy XI or still remember your very first journey across Valkurm Dunes, you have a home here.
+        </p>
+      </div>
+
+      <!-- Mobile Perspective Toggle (Visible only on small screens) -->
+      <div class="flex md:hidden items-center justify-center gap-2 p-1.5 rounded-lg bg-midnight border border-stoneIvory/15 mb-6 reveal">
+        <button type="button" id="toggle-newcomer" onclick="setMobilePerspective('newcomer')"
+          class="flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer bg-aether-cyan/15 text-aether-cyan border border-aether-cyan/40">
+          New to FFXI?
+        </button>
+        <button type="button" id="toggle-veteran" onclick="setMobilePerspective('veteran')"
+          class="flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer text-slateSilver border border-transparent">
+          Returning Veteran?
+        </button>
+      </div>
+
+      <!-- Dual Perspective Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Card 1: New to Final Fantasy XI? -->
+        <article id="card-newcomer" class="crag-panel rounded-2xl p-7 sm:p-9 relative overflow-hidden reveal">
+          <div class="absolute -top-20 -left-20 w-56 h-56 bg-aether-cyan/12 blur-[75px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-aether-cyan/10 border border-aether-cyan/30 mb-5">
+              <span class="w-1.5 h-1.5 rounded-full bg-aether-cyan"></span>
+              <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-aether-cyan">First-Time Adventurer</span>
+            </div>
+
+            <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.08em] text-stoneIvory mb-4">
+              New to Final Fantasy XI?
+            </h3>
+
+            <p class="text-sm sm:text-base text-slateSilver leading-relaxed mb-6">
+              Think of Soulspire XI as a classic, deeply rewarding cooperative fantasy RPG modernized for today. You don't need a twenty-year wiki degree to enjoy it—just pick a job that excites you, step into a vast living world, and learn naturally as you adventure.
+            </p>
+
+            <ul class="space-y-3.5 text-sm text-stoneIvory/90">
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
+                <span><strong class="text-stoneIvory">Simple One-Click Launcher:</strong> No confusing legacy setup—download, patch, and play without the hassle.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
+                <span><strong class="text-stoneIvory">Clear In-Game Guidance:</strong> Streamlined onboarding and intuitive modern menus help you find your footing quickly.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
+                <span><strong class="text-stoneIvory">Welcoming Community:</strong> A friendly Discord filled with fellow adventurers happy to answer questions and group up.</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Card 2: Returning Veteran of Vana'diel? -->
+        <article id="card-veteran" class="hidden md:block crag-panel rounded-2xl p-7 sm:p-9 relative overflow-hidden reveal">
+          <div class="absolute -top-20 -right-20 w-56 h-56 bg-aether-gold/12 blur-[75px] rounded-full pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-aether-gold/10 border border-aether-gold/30 mb-5">
+              <span class="w-1.5 h-1.5 rounded-full bg-aether-gold"></span>
+              <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-aether-gold">Seasoned Hero</span>
+            </div>
+
+            <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.08em] text-stoneIvory mb-4">
+              Returning Veteran of Vana'diel?
+            </h3>
+
+            <p class="text-sm sm:text-base text-slateSilver leading-relaxed mb-6">
+              All twenty-two iconic jobs and the deliberate, tactical soul of Vana'diel are right where your heart left them—now reimagined with genuine discovery. Familiar zones hold new mysteries, and beloved jobs open into uncharted archetypes.
+            </p>
+
+            <ul class="space-y-3.5 text-sm text-stoneIvory/90">
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-gold shrink-0"></span>
+                <span><strong class="text-stoneIvory">Fresh Build Discovery:</strong> Three distinct Soul Crystal paths per job invite experimentation beyond solved era metas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-gold shrink-0"></span>
+                <span><strong class="text-stoneIvory">Modernized Polish:</strong> Crisp visual enhancements and clean custom UIs that respect classic Final Fantasy art direction.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-2 h-2 rotate-45 bg-aether-gold shrink-0"></span>
+                <span><strong class="text-stoneIvory">A Living Horizon:</strong> Evolving encounters and community-informed iteration keep the thrill of the unknown alive.</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 6. MODERNIZED EXPERIENCE PILLARS (3-CARD ATMOSPHERIC GRID)            -->
+  <!-- ===================================================================== -->
+  <section aria-label="Modernized Experience Pillars" class="relative py-24 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10 bg-gradient-to-b from-abyss via-midnight/60 to-abyss">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+        <div>
+          <span class="font-mono text-xs tracking-[0.28em] uppercase text-aether-gold block mb-3">Crafted With Care</span>
+          <h2 class="font-cinzel font-bold text-3xl sm:text-4xl tracking-[0.12em] uppercase text-ivory-gold">
+            A Timeless World, Modernized
+          </h2>
+        </div>
+        <p class="max-w-md text-sm text-slateSilver leading-relaxed">
+          We honor what made classic Vana'diel unforgettable while smoothing away decades-old friction so you can focus purely on the adventure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Pillar 1: Effortless Launcher -->
+        <article class="crag-panel crag-panel-hover rounded-xl p-7 flex flex-col reveal">
+          <div class="w-12 h-12 rounded-lg bg-aether-gold/10 border border-aether-gold/30 flex items-center justify-center mb-6 text-aether-gold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] uppercase text-stoneIvory mb-3">Effortless Launcher</h3>
+          <p class="text-sm text-slateSilver leading-relaxed flex-1">
+            One-click installation and automatic updates handle everything behind the scenes, so you spend your evenings exploring Vana'diel rather than troubleshooting files.
+          </p>
+        </article>
+
+        <!-- Pillar 2: Refined Visuals & UI -->
+        <article class="crag-panel crag-panel-hover rounded-xl p-7 flex flex-col reveal">
+          <div class="w-12 h-12 rounded-lg bg-aether-cyan/10 border border-aether-cyan/30 flex items-center justify-center mb-6 text-aether-cyan">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+            </svg>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] uppercase text-stoneIvory mb-3">Refined Visuals &amp; UI</h3>
+          <p class="text-sm text-slateSilver leading-relaxed flex-1">
+            Thoughtfully modernized interfaces, readable layouts, and custom visual polish elevate the experience while staying deeply faithful to classic Final Fantasy artistry.
+          </p>
+        </article>
+
+        <!-- Pillar 3: A Living, Evolving World -->
+        <article class="crag-panel crag-panel-hover rounded-xl p-7 flex flex-col reveal">
+          <div class="w-12 h-12 rounded-lg bg-aether-violet/15 border border-aether-violet/35 flex items-center justify-center mb-6 text-aether-violet">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253" />
+            </svg>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] uppercase text-stoneIvory mb-3">A Living, Evolving World</h3>
+          <p class="text-sm text-slateSilver leading-relaxed flex-1">
+            Actively developed and shaped alongside its community. Soul Crystals, encounters, and systems evolve thoughtfully over time so the realm always feels alive.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 7. FINAL CALL TO ACTION & CLEAN AAA FOOTER                            -->
+  <!-- ===================================================================== -->
+  <section id="play" class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative rounded-2xl overflow-hidden border border-stoneIvory/20 p-8 sm:p-14 lg:p-16 text-center reveal shadow-[0_28px_80px_-20px_rgba(0,0,0,0.95)]">
+        <!-- Dual-Aether Atmospheric Glows -->
+        <div class="absolute inset-0 bg-gradient-to-br from-midnight via-abyss to-[#121024]" aria-hidden="true"></div>
+        <div class="absolute -top-24 -left-16 w-[440px] h-[280px] bg-aether-cyan/16 blur-[100px] rounded-full pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute -bottom-24 -right-16 w-[440px] h-[280px] bg-aether-gold/16 blur-[100px] rounded-full pointer-events-none" aria-hidden="true"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <span class="font-mono text-xs tracking-[0.3em] uppercase text-aether-cyan block mb-4">The Shattered Realm Awaits</span>
+          <h2 class="font-cinzel font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[0.12em] uppercase text-ivory-gold mb-5">
+            Step Into the Soulspires
+          </h2>
+          <p class="text-slateSilver text-sm sm:text-base leading-relaxed mb-9">
+            Answer the call of forgotten champions, meet fellow adventurers in Discord, and experience Vana'diel as if for the very first time.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button type="button" onclick="openOnboardingModal()" class="btn-molten-gold w-full sm:w-auto min-w-[225px] px-8 py-4 rounded-md font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] uppercase cursor-pointer">
+              Download Launcher
+            </button>
+            <button type="button" onclick="copyDiscordInvite()" class="btn-aether-glass w-full sm:w-auto min-w-[225px] px-8 py-4 rounded-md font-cinzel text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase text-stoneIvory cursor-pointer">
+              Join Discord
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clean AAA Footer -->
+  <footer class="border-t border-stoneIvory/10 bg-[#05080F] pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-stoneIvory/10">
+        <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-lg overflow-hidden border border-aether-gold/35 bg-abyss shrink-0 shadow-[0_0_12px_-3px_rgba(245,194,107,0.28)]">
+              <img
+                src="./assets/soulspire-icon.png"
+                alt="Soulspire XI Emblem"
+                class="w-full h-full object-cover"
+                onerror="this.onerror=null;this.src='https://placehold.co/72x72/080C15/F5C26B?text=XI';"
+              />
+            </div>
+            <span class="font-cinzel font-bold text-lg tracking-[0.2em] text-ivory-gold">SOULSPIRE XI</span>
+          </div>
+          <p class="text-sm text-slateSilver/85 leading-relaxed max-w-sm mb-4">
+            A passion-driven reimagining of Final Fantasy XI inspired by the shattered Crags, sixty-six forgotten champions, and a welcoming living community.
+          </p>
+          <span class="font-mono text-[11px] text-slateSilver/60">soulspirexi.com &bull; Living World</span>
+        </div>
+
+        <!-- Navigation -->
+        <div class="md:col-span-3">
+          <h4 class="font-cinzel text-xs font-bold tracking-[0.2em] uppercase text-aether-gold mb-4">Explore</h4>
+          <ul class="space-y-2.5 text-sm text-slateSilver">
+            <li><a href="#sundering" class="hover:text-stoneIvory transition-colors">The Sundering</a></li>
+            <li><a href="#shards" class="hover:text-stoneIvory transition-colors">The 66 Shards</a></li>
+            <li><a href="#perspectives" class="hover:text-stoneIvory transition-colors">New &amp; Returning</a></li>
+            <li><a href="#play" class="hover:text-stoneIvory transition-colors">Play Soulspire XI</a></li>
+          </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="md:col-span-4">
+          <h4 class="font-cinzel text-xs font-bold tracking-[0.2em] uppercase text-aether-gold mb-4">Community</h4>
+          <ul class="space-y-2.5 text-sm text-slateSilver">
+            <li><button type="button" onclick="openOnboardingModal()" class="hover:text-stoneIvory transition-colors cursor-pointer">Getting Started &amp; Launcher</button></li>
+            <li><button type="button" onclick="copyDiscordInvite()" class="hover:text-stoneIvory transition-colors cursor-pointer">Official Discord Community</button></li>
+            <li><a href="#hero" class="hover:text-stoneIvory transition-colors">Return to Top</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Non-Commercial Fan Project Disclaimer -->
+      <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slateSilver/55 leading-relaxed">
+        <p class="max-w-3xl">
+          Soulspire XI is a non-commercial, fan-made private server project created out of love for classic online RPGs. Final Fantasy XI and all related trademarks, worlds, and assets belong to Square Enix Co., Ltd. Soulspire XI is not affiliated with, endorsed by, or sponsored by Square Enix.
+        </p>
+        <span class="font-mono text-[11px] shrink-0">&copy; 2026 Soulspire XI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE GETTING STARTED / LAUNCHER MODAL                          -->
+  <!-- ===================================================================== -->
+  <div id="onboarding-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="crag-panel relative w-full max-w-xl rounded-2xl p-6 sm:p-8 border-stoneIvory/25 shadow-[0_30px_90px_rgba(0,0,0,0.95)]">
+      <button type="button" onclick="closeOnboardingModal()" aria-label="Close getting started modal" class="absolute top-5 right-5 p-2 rounded-md text-slateSilver hover:text-stoneIvory hover:bg-white/5 cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-2">
+        <span class="w-2 h-2 rotate-45 bg-aether-cyan"></span>
+        <span class="font-mono text-[11px] tracking-[0.22em] uppercase text-aether-cyan">Begin Your Journey</span>
+      </div>
+
+      <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.1em] uppercase text-ivory-gold mb-3">
+        Getting Started in 3 Steps
+      </h3>
+      <p class="text-sm text-slateSilver leading-relaxed mb-6">
+        Stepping into Soulspire XI is straightforward—whether you are brand new to Vana'diel or returning after years away.
+      </p>
+
+      <!-- Simple 3-Step Onboarding Preview -->
+      <div class="space-y-3.5 mb-7">
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-abyss/80 border border-stoneIvory/12">
+          <span class="font-cinzel font-bold text-sm text-aether-cyan bg-aether-cyan/12 border border-aether-cyan/35 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">1</span>
+          <div>
+            <h4 class="font-cinzel text-sm font-bold tracking-[0.08em] text-stoneIvory mb-0.5">Join Discord</h4>
+            <p class="text-xs sm:text-sm text-slateSilver leading-relaxed">Say hello, grab the latest community announcements, and find fellow adventurers to explore with.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-abyss/80 border border-stoneIvory/12">
+          <span class="font-cinzel font-bold text-sm text-aether-violet bg-aether-violet/15 border border-aether-violet/35 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">2</span>
+          <div>
+            <h4 class="font-cinzel text-sm font-bold tracking-[0.08em] text-stoneIvory mb-0.5">Download the Launcher</h4>
+            <p class="text-xs sm:text-sm text-slateSilver leading-relaxed">Run our all-in-one Windows launcher to automatically install and keep your game files up to date.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-abyss/80 border border-stoneIvory/12">
+          <span class="font-cinzel font-bold text-sm text-aether-gold bg-aether-gold/12 border border-aether-gold/35 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">3</span>
+          <div>
+            <h4 class="font-cinzel text-sm font-bold tracking-[0.08em] text-stoneIvory mb-0.5">Step into Vana'diel</h4>
+            <p class="text-xs sm:text-sm text-slateSilver leading-relaxed">Create your character, choose a starting nation, and begin uncovering the shattered Soul Crystals.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <button type="button" onclick="triggerLauncherDownload()" class="btn-molten-gold w-full sm:flex-1 py-3.5 rounded-md font-cinzel text-xs font-bold tracking-[0.16em] uppercase cursor-pointer">
+          Download Launcher
+        </button>
+        <button type="button" onclick="copyDiscordInvite()" class="btn-aether-glass w-full sm:w-auto px-6 py-3.5 rounded-md font-cinzel text-xs font-semibold tracking-[0.14em] uppercase text-stoneIvory cursor-pointer">
+          Copy Discord Link
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 translate-y-16 opacity-0 pointer-events-none transition-all duration-300 crag-panel border-aether-cyan/40 px-4 py-3 rounded-lg flex items-center gap-3 shadow-2xl">
+    <span class="w-2 h-2 rounded-full bg-aether-cyan shrink-0"></span>
+    <span id="toast-message" class="font-mono text-xs text-stoneIvory">Notification</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE JAVASCRIPT                                                -->
+  <!-- ===================================================================== -->
+  <script>
+    /* -----------------------------------------------------------------------
+       1. STICKY NAVBAR FROSTED MIDNIGHT GLASS ON SCROLL
+    ----------------------------------------------------------------------- */
+    const navbar = document.getElementById('navbar');
+    const navbarHairline = document.getElementById('navbar-hairline');
+
+    function updateNavbar() {
+      if (window.scrollY > 24) {
+        navbar.classList.add('bg-abyss/85', 'backdrop-blur-md', 'shadow-[0_12px_35px_rgba(0,0,0,0.7)]');
+        navbarHairline.classList.remove('opacity-0');
+        navbarHairline.classList.add('opacity-100');
+      } else {
+        navbar.classList.remove('bg-abyss/85', 'backdrop-blur-md', 'shadow-[0_12px_35px_rgba(0,0,0,0.7)]');
+        navbarHairline.classList.add('opacity-0');
+        navbarHairline.classList.remove('opacity-100');
+      }
+    }
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    updateNavbar();
+
+    /* -----------------------------------------------------------------------
+       2. MOBILE SLIDE-OUT DRAWER
+    ----------------------------------------------------------------------- */
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+    function openMobileMenu() {
+      mobileBackdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        mobileBackdrop.classList.add('opacity-100');
+        mobileDrawer.classList.remove('translate-x-full');
+      });
+    }
+
+    function closeMobileMenu() {
+      mobileBackdrop.classList.remove('opacity-100');
+      mobileDrawer.classList.add('translate-x-full');
+      setTimeout(() => mobileBackdrop.classList.add('hidden'), 300);
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+
+    /* -----------------------------------------------------------------------
+       3. HERO DUAL-TONE AETHER EMBER PARTICLE CANVAS
+    ----------------------------------------------------------------------- */
+    const aetherCanvas = document.getElementById('aether-canvas');
+    const ctx = aetherCanvas.getContext('2d');
+    let embers = [];
+
+    function resizeAetherCanvas() {
+      const rect = aetherCanvas.parentElement.getBoundingClientRect();
+      aetherCanvas.width = rect.width;
+      aetherCanvas.height = rect.height;
+      initEmbers();
+    }
+
+    function initEmbers() {
+      const count = Math.min(64, Math.max(26, Math.floor((aetherCanvas.width * aetherCanvas.height) / 23000)));
+      const colors = [
+        { r: 56, g: 232, b: 255 },  // Aether Cyan
+        { r: 245, g: 194, b: 107 }, // Molten Gold
+        { r: 157, g: 123, b: 255 }, // Amethyst Violet
+      ];
+      embers = Array.from({ length: count }, () => {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        return {
+          x: Math.random() * aetherCanvas.width,
+          y: Math.random() * aetherCanvas.height,
+          radius: Math.random() * 2 + 0.7,
+          speedY: -(Math.random() * 0.36 + 0.12),
+          speedX: (Math.random() - 0.5) * 0.22,
+          alpha: Math.random() * 0.55 + 0.2,
+          phase: Math.random() * Math.PI * 2,
+          color,
+        };
+      });
+    }
+
+    function animateAether() {
+      ctx.clearRect(0, 0, aetherCanvas.width, aetherCanvas.height);
+
+      for (let i = 0; i < embers.length; i++) {
+        const e = embers[i];
+        e.phase += 0.014;
+        e.y += e.speedY;
+        e.x += e.speedX + Math.sin(e.phase) * 0.14;
+
+        if (e.y < -10) {
+          e.y = aetherCanvas.height + 10;
+          e.x = Math.random() * aetherCanvas.width;
+        }
+        if (e.x < -10) e.x = aetherCanvas.width + 10;
+        if (e.x > aetherCanvas.width + 10) e.x = -10;
+
+        const pulse = e.alpha * (0.7 + 0.3 * Math.sin(e.phase * 1.6));
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${e.color.r}, ${e.color.g}, ${e.color.b}, ${pulse})`;
+        ctx.shadowBlur = 9;
+        ctx.shadowColor = `rgba(${e.color.r}, ${e.color.g}, ${e.color.b}, 0.65)`;
+        ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+      requestAnimationFrame(animateAether);
+    }
+
+    window.addEventListener('resize', resizeAetherCanvas);
+
+    /* -----------------------------------------------------------------------
+       4. INTERACTIVE "FIVE CRAGS RESONANCE" LORE EXPLORER
+    ----------------------------------------------------------------------- */
+    const cragsData = {
+      holla: {
+        name: 'Crag of Holla',
+        region: 'La Theine Plateau',
+        aspect: 'Resonance of Valor',
+        accent: 'text-aether-gold',
+        whisper:
+          '“Above the windswept hills of San d’Oria, the spire split like a sundered shield—scattering golden memories of oathbound knights across the emerald plateau.”',
+      },
+      dem: {
+        name: 'Crag of Dem',
+        region: 'Konschtat Highlands',
+        aspect: 'Resonance of Tempered Steel',
+        accent: 'text-aether-cyan',
+        whisper:
+          '“Thunder answered the silent tremor over Gustaberg’s borderlands, forging shards of unyielding discipline that hum whenever iron meets iron.”',
+      },
+      mea: {
+        name: 'Crag of Mea',
+        region: 'Tahrongi Canyon',
+        aspect: 'Resonance of Living Harmony',
+        accent: 'text-aether-violet',
+        whisper:
+          '“Across the sunlit canyons of Mindartia, violet and azure prisms drifted down like falling stars, whispering ancient songs of weavers and seers.”',
+      },
+      vahzl: {
+        name: 'Crag of Vahzl',
+        region: 'Frozen Wastes of Xarcabard',
+        aspect: 'Resonance of Unbroken Will',
+        accent: 'text-aether-cyan',
+        whisper:
+          '“Even beneath northern snows and shadow, the fractured spire burns cold and bright—calling to those who dare stare down the coming dark.”',
+      },
+      altaieu: {
+        name: "Spire of Al'Taieu",
+        region: 'The Celestial Capital',
+        aspect: 'Convergence of All Aether',
+        accent: 'text-aether-gold',
+        whisper:
+          '“At the heart of the sky-sea, cyan and gold streams braided together, awakening sixty-six forgotten souls to walk Vana’diel once more.”',
+      },
+    };
+
+    function selectCrag(key) {
+      const crag = cragsData[key];
+      if (!crag) return;
+
+      document.querySelectorAll('.crag-btn').forEach((btn) => {
+        const active = btn.getAttribute('data-crag') === key;
+        if (active) {
+          btn.className = btn.className.includes('col-span-2')
+            ? 'crag-btn col-span-2 sm:col-span-2 lg:col-span-2 px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer bg-aether-cyan/12 border-aether-cyan/60 text-stoneIvory shadow-[0_0_20px_-6px_rgba(56,232,255,0.4)]'
+            : 'crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer bg-aether-cyan/12 border-aether-cyan/60 text-stoneIvory shadow-[0_0_20px_-6px_rgba(56,232,255,0.4)]';
+        } else {
+          btn.className = btn.className.includes('col-span-2')
+            ? 'crag-btn col-span-2 sm:col-span-2 lg:col-span-2 px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer bg-abyss/70 border-stoneIvory/12 text-slateSilver hover:border-aether-gold/40 hover:text-stoneIvory'
+            : 'crag-btn px-3.5 py-3 rounded-lg text-left border transition-all cursor-pointer bg-abyss/70 border-stoneIvory/12 text-slateSilver hover:border-aether-gold/40 hover:text-stoneIvory';
+        }
+      });
+
+      const box = document.getElementById('crag-whisper-box');
+      box.innerHTML = `
+        <div class="fade-swap">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <span class="font-cinzel font-bold text-base tracking-[0.1em] text-stoneIvory">${crag.name}</span>
+            <span class="font-mono text-[10px] tracking-[0.18em] uppercase ${crag.accent}">${crag.aspect}</span>
+          </div>
+          <p class="text-sm text-stoneIvory/90 italic leading-relaxed mb-4">${crag.whisper}</p>
+          <div class="pt-3 border-t border-stoneIvory/10 flex items-center justify-between font-mono text-[10px] text-slateSilver/75">
+            <span>Location: ${crag.region}</span>
+            <span class="text-aether-gold">Echo Active</span>
+          </div>
+        </div>
+      `;
+    }
+
+    /* -----------------------------------------------------------------------
+       5. INTERACTIVE SIXTY-SIX SHARDS & THREE CALLINGS SHOWCASE (LORE-ONLY)
+    ----------------------------------------------------------------------- */
+    const callingsData = {
+      vanguard: {
+        badge: 'Gold & Carved Stone Resonance',
+        badgeClass: 'text-aether-gold bg-aether-gold/12 border-aether-gold/30',
+        title: 'The Vanguard & Bastions',
+        fantasy:
+          'Unyielding champions whose discipline and resolve turn sheer presence into an impenetrable wall. Whether standing firm against towering beasts or shielding allies from ruin, these archetypes embody grit, guardianship, and steadfast poise.',
+        roleFocus: 'Frontline Presence & Guardianship',
+        toneBorder: 'border-aether-gold/45 bg-aether-gold/10 shadow-[0_0_28px_-8px_rgba(245,194,107,0.35)]',
+        chipClass: 'border-aether-gold/35 bg-aether-gold/10 text-aether-gold',
+        cardHover: 'hover:border-aether-gold/45',
+        accentDot: 'bg-aether-gold',
+        tags: ['All', 'Tank', 'Tank · Hybrid Support'],
+      },
+      strikers: {
+        badge: 'Aether Cyan & Amethyst Resonance',
+        badgeClass: 'text-aether-cyan bg-aether-cyan/12 border-aether-cyan/30',
+        title: 'The Unbound Strikers',
+        fantasy:
+          'Relentless blades and arcane conduits who channel raw destructive momentum to shatter overwhelming foes. Built for adventurers who thrive on decisive poise, daring flair, and turning every opening into an unforgettable legend.',
+        roleFocus: 'Relentless Offense & Arcane Mastery',
+        toneBorder: 'border-aether-cyan/50 bg-aether-cyan/10 shadow-[0_0_28px_-8px_rgba(56,232,255,0.35)]',
+        chipClass: 'border-aether-cyan/35 bg-aether-cyan/10 text-aether-cyan',
+        cardHover: 'hover:border-aether-cyan/45',
+        accentDot: 'bg-aether-cyan',
+        tags: ['All', 'Damage'],
+      },
+      tacticians: {
+        badge: 'Cyan & Celestial Gold Harmony',
+        badgeClass: 'text-aether-violet bg-aether-violet/15 border-aether-violet/35',
+        title: 'The Tacticians & Menders',
+        fantasy:
+          'Battlefield conductors and life-weavers who reshape the rhythm of every journey through foresight, harmony, and restoration. Ideal for adventurers who love empowering their company, reading the flow of fate, and turning desperate moments into triumph.',
+        roleFocus: 'Harmony, Restoration & Command',
+        toneBorder: 'border-aether-violet/55 bg-aether-violet/12 shadow-[0_0_28px_-8px_rgba(157,123,255,0.38)]',
+        chipClass: 'border-aether-violet/40 bg-aether-violet/15 text-purple-200',
+        cardHover: 'hover:border-aether-violet/50',
+        accentDot: 'bg-aether-violet',
+        tags: ['All', 'Healer', 'Combat Healer', 'Support', 'Hybrid Support'],
+      },
+    };
+
+    const sixtySixSouls = [
+      // WAR — Warrior
+      { name: 'Spartan', jobCode: 'WAR', jobName: 'Warrior', calling: 'vanguard', tag: 'Tank', lore: 'An unbroken spear-and-buckler stalwart forged in the discipline of the ancient phalanx, holding the line where lesser shields shatter.' },
+      { name: 'Berserker', jobCode: 'WAR', jobName: 'Warrior', calling: 'strikers', tag: 'Damage', lore: 'A storm of untamed martial fury who surrenders caution to the roar of battle, cleaving through ranks with primal ferocity.' },
+      { name: 'Commander', jobCode: 'WAR', jobName: 'Warrior', calling: 'tacticians', tag: 'Support', lore: 'A seasoned war-captain whose rallying cries and battlefield formations turn scattered adventurers into an ironclad company.' },
+
+      // MNK — Monk
+      { name: 'Sensei', jobCode: 'MNK', jobName: 'Monk', calling: 'vanguard', tag: 'Tank', lore: 'A serene master of the quarterstaff and martial stillness who turns an opponent’s own momentum into poise and unshakable footing.' },
+      { name: 'Black Belt', jobCode: 'MNK', jobName: 'Monk', calling: 'strikers', tag: 'Damage', lore: 'A living instrument of disciplined fist and foot, channeling lifelong temple training into a seamless tempest of strikes.' },
+      { name: 'Chi Weaver', jobCode: 'MNK', jobName: 'Monk', calling: 'tacticians', tag: 'Healer', lore: 'An empty-handed mystic who draws luminous life-force from within, guiding soothing currents of chi across the fray.' },
+
+      // WHM — White Mage
+      { name: 'Zealot', jobCode: 'WHM', jobName: 'White Mage', calling: 'strikers', tag: 'Damage', lore: 'A militant crusader of sacred light who walks the frontlines with staff in hand, answering darkness with radiant conviction.' },
+      { name: 'Bishop', jobCode: 'WHM', jobName: 'White Mage', calling: 'tacticians', tag: 'Healer', lore: 'A high steward of sanctuary and solemn grace whose luminous benedictions shelter the faithful before ruin can fall.' },
+      { name: 'Valkyrie', jobCode: 'WHM', jobName: 'White Mage', calling: 'tacticians', tag: 'Support', lore: 'A winged-spear sentinel of the sacred order who watches over vulnerable allies and steadies their resolve amidst chaos.' },
+
+      // BLM — Black Mage
+      { name: 'Necromancer', jobCode: 'BLM', jobName: 'Black Mage', calling: 'vanguard', tag: 'Tank · Hybrid Support', lore: 'A forbidden scholar of twilight and the scythe who binds restless echoes of the fallen to stand watch or whisper dark sorcery.' },
+      { name: 'Astromancer', jobCode: 'BLM', jobName: 'Black Mage', calling: 'strikers', tag: 'Damage', lore: 'A stargazing archmage who reads celestial alignments to call down cataclysmic astral forces upon Vana’diel’s mightiest foes.' },
+      { name: 'Channeler', jobCode: 'BLM', jobName: 'Black Mage', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A selfless conduit of arcane current who binds their own aetheric flow to an ally, amplifying a fellow caster’s grandest incantations.' },
+
+      // RDM — Red Mage
+      { name: 'Crimson Duelist', jobCode: 'RDM', jobName: 'Red Mage', calling: 'vanguard', tag: 'Tank', lore: 'An aristocratic fencer who weaves dueling elegance with subtle hexes, meeting overwhelming foes blade-to-blade with unruffled poise.' },
+      { name: 'Scarlet Weaver', jobCode: 'RDM', jobName: 'Red Mage', calling: 'strikers', tag: 'Damage', lore: 'A virtuoso of crimson duality who balances keen swordplay and refined sorcery, shifting gracefully between steel and spell.' },
+      { name: 'Royal Tactician', jobCode: 'RDM', jobName: 'Red Mage', calling: 'tacticians', tag: 'Support', lore: 'A courtly strategist of San d’Orian and Jeunoan tradition who reads the ebb of battle to issue decisive, tailored commands.' },
+
+      // THF — Thief
+      { name: 'Phantom', jobCode: 'THF', jobName: 'Thief', calling: 'vanguard', tag: 'Tank', lore: 'A taunting shadow-dancer who draws every eye and blade onto themselves, slipping past danger like smoke through clenched fingers.' },
+      { name: 'Bandit', jobCode: 'THF', jobName: 'Thief', calling: 'strikers', tag: 'Damage', lore: 'A ruthless opportunist of back-alley steel who spots the faintest crack in a foe’s guard and strikes without hesitation.' },
+      { name: 'Trickster', jobCode: 'THF', jobName: 'Thief', calling: 'tacticians', tag: 'Support', lore: 'A silver-tongued schemer of misdirection and sleight of hand who orchestrates the flow of attention across the battlefield.' },
+
+      // PLD — Paladin
+      { name: 'Defender', jobCode: 'PLD', jobName: 'Paladin', calling: 'vanguard', tag: 'Tank', lore: 'An oathbound bastion of royal steel who steps willingly into harm’s path, interposing shield and sacred vow between danger and comrades.' },
+      { name: 'Oathbreaker', jobCode: 'PLD', jobName: 'Paladin', calling: 'strikers', tag: 'Damage', lore: 'A grim knight who casts aside gentle restraint for a singular, uncompromising vow of judgment carried on a heavy greatsword.' },
+      { name: 'Templar', jobCode: 'PLD', jobName: 'Paladin', calling: 'tacticians', tag: 'Combat Healer', lore: 'A frontline hospitaller whose consecrated swings and steadfast presence bring dawn-lit solace to wounded companions in the thick of battle.' },
+
+      // DRK — Dark Knight
+      { name: 'Dreadnought', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'vanguard', tag: 'Tank', lore: 'An imposing juggernaut of dark plate and crimson resolve who drinks deeply of shadow to outlast the fiercest onslaught.' },
+      { name: 'Reaper', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'strikers', tag: 'Damage', lore: 'A patient executioner of the curved scythe who watches for a foe’s fleeting moment of vulnerability and harvests it in silence.' },
+      { name: 'Scourge', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'tacticians', tag: 'Support', lore: 'A feared hex-bearer who lays targeted maledictions upon a monster’s deadliest nature, stifling ruin before it can unfold.' },
+
+      // BST — Beastmaster
+      { name: 'Alpha Warden', jobCode: 'BST', jobName: 'Beastmaster', calling: 'vanguard', tag: 'Tank', lore: 'A fierce pack-leader who stands shoulder-to-shoulder with a loyal guardian beast, sharing every hardship through an unbreakable bond.' },
+      { name: 'Untamed', jobCode: 'BST', jobName: 'Beastmaster', calling: 'strikers', tag: 'Damage', lore: 'A wild-hearted hunter who moves in primal tandem with a ferocious companion, turning master and beast into one relentless predator.' },
+      { name: 'Beastspeaker', jobCode: 'BST', jobName: 'Beastmaster', calling: 'tacticians', tag: 'Support', lore: 'A keen naturalist of Vana’diel’s ecosystems who reads a creature’s lineage and guides companions toward its natural vulnerability.' },
+
+      // BRD — Bard
+      { name: 'Minstrel', jobCode: 'BRD', jobName: 'Bard', calling: 'vanguard', tag: 'Tank', lore: 'A defiant troubadour whose resonant chords and iron-willed ballads command the attention of titans while fortifying their own spirit.' },
+      { name: 'Adventurer', jobCode: 'BRD', jobName: 'Bard', calling: 'strikers', tag: 'Damage', lore: 'A dashing blade-dancer of the open road who weaves twin-steel flourishes into vibrant, echoing melodies.' },
+      { name: 'Musician', jobCode: 'BRD', jobName: 'Bard', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A concert virtuoso of Vana’diel’s ancient harmonies whose dramatic crescendos both uplift companions and shatter foes with sound.' },
+
+      // RNG — Ranger
+      { name: 'Huntsman', jobCode: 'RNG', jobName: 'Ranger', calling: 'vanguard', tag: 'Tank · Hybrid Support', lore: 'A frontier tracker bonded to a fierce wild companion, directing primal loyalty from the thick of the hunt to hold the wilderness at bay.' },
+      { name: 'Sniper', jobCode: 'RNG', jobName: 'Ranger', calling: 'strikers', tag: 'Damage', lore: 'A dead-eyed marksman of quiet patience who claims a clear sightline and lets a single, unerring shot speak across the horizon.' },
+      { name: 'Arcane Archer', jobCode: 'RNG', jobName: 'Ranger', calling: 'tacticians', tag: 'Support', lore: 'A mystic fletching artisan who inscribes elemental resonance onto every arrow, painting luminous marks for allies to awaken.' },
+
+      // SAM — Samurai
+      { name: 'Ronin', jobCode: 'SAM', jobName: 'Samurai', calling: 'vanguard', tag: 'Tank', lore: 'A wandering master of the great katana whose serene clarity absorbs terrible blows with stoic grace before shedding their weight.' },
+      { name: 'Imperial Archer', jobCode: 'SAM', jobName: 'Samurai', calling: 'tacticians', tag: 'Support', lore: 'A noble retainer of Far Eastern courtly arms who bridges distant bowcraft and drawing-blade mastery in a single unbroken cadence.' },
+      { name: 'Warlord', jobCode: 'SAM', jobName: 'Samurai', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A commanding shogunate champion whose decisive bladework kindles an inspiring martial aura across every warrior at their side.' },
+
+      // NIN — Ninja
+      { name: 'Kagemusha', jobCode: 'NIN', jobName: 'Ninja', calling: 'vanguard', tag: 'Tank', lore: 'A phantom body-double of drifting ash and lantern smoke who bewilders foes with shifting decoys and vanishing silhouettes.' },
+      { name: 'Shinobi', jobCode: 'NIN', jobName: 'Ninja', calling: 'strikers', tag: 'Damage', lore: 'A shadowy master of forbidden duplication who surrounds their quarry with a fleeting retinue of striking mirror-selves.' },
+      { name: 'Nightblade', jobCode: 'NIN', jobName: 'Ninja', calling: 'tacticians', tag: 'Support', lore: 'A vigilant watcher of the unseen clan who reads an enemy’s smallest tell and seals away looming danger with swift hand-signs.' },
+
+      // DRG — Dragoon
+      { name: 'Skyborn', jobCode: 'DRG', jobName: 'Dragoon', calling: 'vanguard', tag: 'Tank', lore: 'A proud lance-knight of the high crags who takes to the wind at the decisive heartbeat, descending with thunderous presence to command the field.' },
+      { name: 'Lancer', jobCode: 'DRG', jobName: 'Dragoon', calling: 'strikers', tag: 'Damage', lore: 'A fearless spearhead who measures the open ground and surges across the battlefield in a devastating vaulted charge.' },
+      { name: 'Wyvernheart', jobCode: 'DRG', jobName: 'Dragoon', calling: 'tacticians', tag: 'Combat Healer', lore: 'A dragon-bonded guardian whose kinship with a living wyvern channels soaring vitality and restorative breath to allies in peril.' },
+
+      // SMN — Summoner
+      { name: 'Primalist', jobCode: 'SMN', jobName: 'Summoner', calling: 'strikers', tag: 'Damage', lore: 'An avatar-channeler attuned to the shifting elements who invokes celestial fury when the winds of elemental allegiance align.' },
+      { name: 'Celestial', jobCode: 'SMN', jobName: 'Summoner', calling: 'tacticians', tag: 'Healer', lore: 'A serene pact-keeper who calls down starlit avatars to weave tranquil sanctuaries of comfort and celestial grace.' },
+      { name: 'Herald', jobCode: 'SMN', jobName: 'Summoner', calling: 'tacticians', tag: 'Support', lore: 'A voice of the astral accords who announces an avatar’s elemental chorus, uniting allies in a shared symphony of planar power.' },
+
+      // BLU — Blue Mage
+      { name: 'Azure Bastion', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'vanguard', tag: 'Tank', lore: 'An Immortal sentinel who tempers body and spirit with assimilated monstrous resilience, adapting their carapace to every peril.' },
+      { name: 'Warmage', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'strikers', tag: 'Damage', lore: 'A calculating student of bestial lore who curates an arsenal of stolen monster arts to answer any foe’s defenses.' },
+      { name: 'Magus', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'tacticians', tag: 'Combat Healer', lore: 'A twin-bladed alchemist of azure essence whose fluid strikes and esoteric chants ripple outward in waves of renewal.' },
+
+      // COR — Corsair
+      { name: 'Buccaneer', jobCode: 'COR', jobName: 'Corsair', calling: 'vanguard', tag: 'Tank', lore: 'A swaggering cutlass-and-pistol privateer who thrives at point-blank range, turning black-powder bravado into hardened resolve.' },
+      { name: 'Flintlock', jobCode: 'COR', jobName: 'Corsair', calling: 'strikers', tag: 'Damage', lore: 'A relentless gunslinger of sea-salt and smoke who unleashes disciplined volleys of blazing shot across the deck.' },
+      { name: 'Gambler', jobCode: 'COR', jobName: 'Corsair', calling: 'tacticians', tag: 'Support', lore: 'A daring fortune-weaver of ivory dice and phantom cards who steadies the crew’s luck while flirting with audacious wagers.' },
+
+      // PUP — Puppetmaster
+      { name: 'Vanguard', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'vanguard', tag: 'Tank', lore: 'A master artisan commanding an armored Valoredge automaton, directing clockwork valor to stand immovable before towering foes.' },
+      { name: 'Pugilist', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'strikers', tag: 'Damage', lore: 'A kinetic fighter who boxes in tight synchronization with a finely tuned frame, turning master and machine into a seamless duo.' },
+      { name: 'Animist', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'tacticians', tag: 'Combat Healer', lore: 'A compassionate alchemist-mechanic who guides a restorative automaton with subtle elemental signals to mend and shelter allies.' },
+
+      // DNC — Dancer
+      { name: 'Mirage Sentinel', jobCode: 'DNC', jobName: 'Dancer', calling: 'vanguard', tag: 'Tank', lore: 'A mesmerizing troupe-guardian whose whirling twin daggers and fan-lit footwork lure strikes into graceful, dazzling deflections.' },
+      { name: 'Bladewheel', jobCode: 'DNC', jobName: 'Dancer', calling: 'strikers', tag: 'Damage', lore: 'An acrobatic skirmisher of spinning chakrams who keeps the rhythm of the dance alive from beyond the crush of steel.' },
+      { name: 'Vampire', jobCode: 'DNC', jobName: 'Dancer', calling: 'tacticians', tag: 'Combat Healer', lore: 'A velvet-cloaked reveler of crimson waltzes who siphons vitality from the heat of combat to sustain every partner on the floor.' },
+
+      // SCH — Scholar
+      { name: 'Sage', jobCode: 'SCH', jobName: 'Scholar', calling: 'strikers', tag: 'Damage', lore: 'A learned elemental theorist accompanied by a fierce fae spirit, inscribing enduring arcane equations across protracted battles.' },
+      { name: 'Medic', jobCode: 'SCH', jobName: 'Scholar', calling: 'tacticians', tag: 'Healer', lore: 'A field-academy physician guided by luminous grimoires and a gentle fae companion, tending weary ranks with calm precision.' },
+      { name: 'Archivist', jobCode: 'SCH', jobName: 'Scholar', calling: 'tacticians', tag: 'Support', lore: 'A meticulous chronicler of monster lore who studies a foe’s signature habits and drafts tailored countermeasures on the parchment of battle.' },
+
+      // GEO — Geomancer
+      { name: 'Terramancer', jobCode: 'GEO', jobName: 'Geomancer', calling: 'strikers', tag: 'Damage', lore: 'A seismic mystic who listens to the deep pulse beneath the crust, calling forth sudden earthen upheavals along shifting fault lines.' },
+      { name: 'Verdant', jobCode: 'GEO', jobName: 'Geomancer', calling: 'tacticians', tag: 'Healer', lore: 'A gentle steward of living ley-lines who plants blooming luopan sanctuaries where weary travelers gather to be made whole.' },
+      { name: 'Diviner', jobCode: 'GEO', jobName: 'Geomancer', calling: 'tacticians', tag: 'Support', lore: 'A geomantic wayfinder who traces luminous ley-corridors across the terrain, empowering allies who hold the sacred line.' },
+
+      // RUN — Rune Fencer
+      { name: 'Inquisitor', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'vanguard', tag: 'Tank', lore: 'A stern sentinel of the Sacred City’s arcane traditions who shifts effortlessly between honed swordplay and shimmering runic wards.' },
+      { name: 'Spellblade', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'strikers', tag: 'Damage', lore: 'A greatsword-wielding conduit who etches glowing runes along steel, unleashing conducted elemental brilliance in decisive strokes.' },
+      { name: 'Lifebinder', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'tacticians', tag: 'Healer', lore: 'A frontline rune-mender who braids living sigils into restorative pulses, renewing embattled allies amid the clash of arms.' },
+    ];
+
+    const classicJobsOrder = [
+      { code: 'WAR', name: 'Warrior' },
+      { code: 'MNK', name: 'Monk' },
+      { code: 'WHM', name: 'White Mage' },
+      { code: 'BLM', name: 'Black Mage' },
+      { code: 'RDM', name: 'Red Mage' },
+      { code: 'THF', name: 'Thief' },
+      { code: 'PLD', name: 'Paladin' },
+      { code: 'DRK', name: 'Dark Knight' },
+      { code: 'BST', name: 'Beastmaster' },
+      { code: 'BRD', name: 'Bard' },
+      { code: 'RNG', name: 'Ranger' },
+      { code: 'SAM', name: 'Samurai' },
+      { code: 'NIN', name: 'Ninja' },
+      { code: 'DRG', name: 'Dragoon' },
+      { code: 'SMN', name: 'Summoner' },
+      { code: 'BLU', name: 'Blue Mage' },
+      { code: 'COR', name: 'Corsair' },
+      { code: 'PUP', name: 'Puppetmaster' },
+      { code: 'DNC', name: 'Dancer' },
+      { code: 'SCH', name: 'Scholar' },
+      { code: 'GEO', name: 'Geomancer' },
+      { code: 'RUN', name: 'Rune Fencer' },
+    ];
+
+    let activeCallingKey = 'vanguard';
+    let activeShardTag = 'All';
+    let shardViewMode = 'calling'; // 'calling' | 'jobs'
+
+    function selectCalling(key) {
+      if (!callingsData[key]) return;
+      activeCallingKey = key;
+      activeShardTag = 'All';
+      shardViewMode = 'calling';
+      renderShardsPanel();
+    }
+
+    function setShardTag(tag) {
+      activeShardTag = tag;
+      renderShardsPanel();
+    }
+
+    function setShardViewMode(mode) {
+      shardViewMode = mode;
+      renderShardsPanel();
+    }
+
+    function renderSoulCard(soul) {
+      const callingMeta = callingsData[soul.calling];
+      return `
+        <article class="rounded-xl bg-abyss/80 border border-stoneIvory/12 ${callingMeta.cardHover} p-4 sm:p-5 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-slateSilver/90">
+                ${soul.jobName}
+              </span>
+              <span class="font-mono text-[10px] tracking-[0.12em] uppercase px-2.5 py-0.5 rounded-full border ${callingMeta.chipClass}">
+                ${soul.tag}
+              </span>
+            </div>
+            <h4 class="font-cinzel font-bold text-base tracking-[0.07em] text-stoneIvory mb-2">
+              ${soul.name}
+            </h4>
+            <p class="text-xs sm:text-[13px] text-slateSilver leading-relaxed">
+              ${soul.lore}
+            </p>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderShardsPanel() {
+      const data = callingsData[activeCallingKey];
+      if (!data) return;
+
+      document.querySelectorAll('.calling-tab').forEach((btn) => {
+        const isCurrent = shardViewMode === 'calling' && btn.getAttribute('data-calling') === activeCallingKey;
+        btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        if (isCurrent) {
+          btn.className = `calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer ${data.toneBorder}`;
+        } else {
+          btn.className =
+            'calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer border-stoneIvory/12 bg-midnight/75 hover:border-stoneIvory/30';
+        }
+      });
+
+      const panel = document.getElementById('calling-preview-panel');
+
+      if (shardViewMode === 'jobs') {
+        const jobsHtml = classicJobsOrder.map((job) => {
+          const branches = sixtySixSouls.filter((s) => s.jobCode === job.code);
+          return `
+            <div class="rounded-xl bg-midnight/70 border border-stoneIvory/12 p-4 sm:p-5">
+              <div class="flex items-center justify-between gap-2 pb-3 mb-3.5 border-b border-stoneIvory/10">
+                <h4 class="font-cinzel font-bold text-base sm:text-lg tracking-[0.08em] text-stoneIvory">${job.name}</h4>
+                <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-slateSilver/75">3 Shards</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                ${branches.map((soul) => renderSoulCard(soul)).join('')}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        panel.innerHTML = `
+          <div class="fade-swap">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 mb-6 border-b border-stoneIvory/10">
+              <div class="max-w-2xl">
+                <span class="inline-block font-mono text-[10px] tracking-[0.22em] uppercase px-3 py-1 rounded-full border mb-3 text-aether-gold bg-aether-gold/12 border-aether-gold/30">
+                  Complete Compendium &bull; 22 Classic Jobs &bull; 66 Shards
+                </span>
+                <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.1em] uppercase text-ivory-gold mb-2">
+                  All Twenty-Two Lineages
+                </h3>
+                <p class="text-sm text-slateSilver leading-relaxed">
+                  Every classic Vana’diel job branches into three distinct thematic identities across the Three Great Callings.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="setShardViewMode('calling')"
+                  class="px-3.5 py-2 rounded-lg border border-stoneIvory/15 bg-abyss/80 text-slateSilver hover:text-stoneIvory hover:border-stoneIvory/35 font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
+                  By Calling
+                </button>
+                <button type="button" onclick="setShardViewMode('jobs')"
+                  class="px-3.5 py-2 rounded-lg border border-aether-gold/50 bg-aether-gold/12 text-aether-gold font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
+                  All 22 Jobs (66)
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              ${jobsHtml}
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-stoneIvory/10 flex items-start gap-2.5">
+              <span class="mt-1 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
+              <p class="font-mono text-[11px] text-slateSilver/85 leading-relaxed">
+                Living Design: Archetypes, themes, and worldbuilding evolve continuously alongside our player community.
+              </p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const callingSouls = sixtySixSouls.filter((s) => s.calling === activeCallingKey);
+      const filteredSouls =
+        activeShardTag === 'All'
+          ? callingSouls
+          : callingSouls.filter((s) => s.tag === activeShardTag);
+
+      const tagButtonsHtml =
+        data.tags.length > 2
+          ? `<div class="flex flex-wrap items-center gap-2">
+              ${data.tags.map((tag) => {
+                const count = tag === 'All' ? callingSouls.length : callingSouls.filter((s) => s.tag === tag).length;
+                const isSelected = activeShardTag === tag;
+                const cls = isSelected
+                  ? `${data.chipClass} font-semibold`
+                  : 'border-stoneIvory/12 bg-abyss/75 text-slateSilver hover:text-stoneIvory hover:border-stoneIvory/30';
+                return `
+                  <button type="button" onclick="setShardTag('${tag}')"
+                    class="px-3 py-1.5 rounded-full border font-mono text-[10px] tracking-[0.14em] uppercase transition-all cursor-pointer ${cls}">
+                    ${tag} (${count})
+                  </button>
+                `;
+              }).join('')}
+            </div>`
+          : `<span class="font-mono text-[10px] tracking-[0.16em] uppercase px-3 py-1.5 rounded-full border ${data.chipClass}">
+              Damage (${callingSouls.length})
+            </span>`;
+
+      panel.innerHTML = `
+        <div class="fade-swap">
+          <!-- Calling Overview Header -->
+          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 mb-6 border-b border-stoneIvory/10">
+            <div class="max-w-3xl">
+              <span class="inline-block font-mono text-[10px] tracking-[0.22em] uppercase px-3 py-1 rounded-full border mb-3.5 ${data.badgeClass}">
+                ${data.badge}
+              </span>
+              <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.1em] uppercase text-ivory-gold mb-3">
+                ${data.title}
+              </h3>
+              <p class="text-sm sm:text-base text-slateSilver leading-relaxed mb-4">
+                ${data.fantasy}
+              </p>
+              <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stoneMuted">
+                <span class="inline-flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full ${data.accentDot}"></span>
+                  <span>Thematic Identity: <strong class="text-stoneIvory font-medium">${data.roleFocus}</strong></span>
+                </span>
+                <span class="font-mono text-[11px] text-slateSilver/80">
+                  Showing ${filteredSouls.length} of ${callingSouls.length} Shards
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 shrink-0">
+              <button type="button" onclick="setShardViewMode('calling')"
+                class="px-3.5 py-2 rounded-lg border font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer ${data.chipClass}">
+                By Calling
+              </button>
+              <button type="button" onclick="setShardViewMode('jobs')"
+                class="px-3.5 py-2 rounded-lg border border-stoneIvory/15 bg-abyss/80 text-slateSilver hover:text-stoneIvory hover:border-aether-gold/45 font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
+                All 22 Jobs (66)
+              </button>
+            </div>
+          </div>
+
+          <!-- Tag Filter Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-slateSilver">
+              Filter by Tag Category
+            </span>
+            ${tagButtonsHtml}
+          </div>
+
+          <!-- Shards Roster Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
+            ${filteredSouls.map((soul) => renderSoulCard(soul)).join('')}
+          </div>
+
+          <!-- Living Design Footer Note -->
+          <div class="pt-4 border-t border-stoneIvory/10 flex items-start gap-2.5">
+            <span class="mt-1 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
+            <p class="font-mono text-[11px] text-slateSilver/85 leading-relaxed">
+              Living Design: Archetypes, themes, and worldbuilding evolve continuously alongside our player community.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* -----------------------------------------------------------------------
+       6. MOBILE PERSPECTIVE TOGGLE (NEWCOMER VS. VETERAN)
+    ----------------------------------------------------------------------- */
+    function setMobilePerspective(mode) {
+      const cardNewcomer = document.getElementById('card-newcomer');
+      const cardVeteran = document.getElementById('card-veteran');
+      const btnNewcomer = document.getElementById('toggle-newcomer');
+      const btnVeteran = document.getElementById('toggle-veteran');
+
+      if (mode === 'newcomer') {
+        cardNewcomer.classList.remove('hidden');
+        cardVeteran.classList.add('hidden');
+        cardVeteran.classList.add('md:block');
+
+        btnNewcomer.className =
+          'flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer bg-aether-cyan/15 text-aether-cyan border border-aether-cyan/40';
+        btnVeteran.className =
+          'flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer text-slateSilver border border-transparent';
+      } else {
+        cardNewcomer.classList.add('hidden');
+        cardNewcomer.classList.add('md:block');
+        cardVeteran.classList.remove('hidden');
+
+        btnVeteran.className =
+          'flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer bg-aether-gold/15 text-aether-gold border border-aether-gold/40';
+        btnNewcomer.className =
+          'flex-1 py-2.5 rounded-md font-cinzel text-xs font-bold tracking-[0.12em] uppercase transition-all cursor-pointer text-slateSilver border border-transparent';
+      }
+    }
+
+    /* -----------------------------------------------------------------------
+       7. GETTING STARTED / LAUNCHER MODAL & TOAST HELPERS
+    ----------------------------------------------------------------------- */
+    const onboardingModal = document.getElementById('onboarding-modal');
+    let toastTimer = null;
+
+    function openOnboardingModal() {
+      onboardingModal.classList.remove('hidden');
+      onboardingModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOnboardingModal() {
+      onboardingModal.classList.add('hidden');
+      onboardingModal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    onboardingModal.addEventListener('click', (e) => {
+      if (e.target === onboardingModal) closeOnboardingModal();
+    });
+
+    function triggerLauncherDownload() {
+      const launcherUrl = 'https://github.com/Infomatictek/soulspirexi-launcher/releases';
+      window.open(launcherUrl, '_blank', 'noopener,noreferrer');
+      showToast('Opening Soulspire XI Launcher releases...');
+    }
+
+    function copyDiscordInvite() {
+      const invite = 'https://discord.gg/soulspirexi';
+      const temp = document.createElement('textarea');
+      temp.value = invite;
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+        showToast('Discord invite copied: discord.gg/soulspirexi');
+      } catch (err) {
+        showToast('Visit our community at discord.gg/soulspirexi');
+      }
+      document.body.removeChild(temp);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-message');
+      msg.textContent = message;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    }
+
+    /* -----------------------------------------------------------------------
+       8. SCROLL REVEAL & INITIALIZATION ON WINDOW LOAD
+    ----------------------------------------------------------------------- */
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -36px 0px' }
+    );
+
+    window.onload = function () {
+      resizeAetherCanvas();
+      animateAether();
+      selectCrag('holla');
+      selectCalling('vanguard');
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeOnboardingModal();
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>
