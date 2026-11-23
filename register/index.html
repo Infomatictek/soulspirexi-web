@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Registration — SoulspireXI</title>
+  <meta name="description" content="Register your invite-only SoulspireXI Public Alpha game account." />
+  <link rel="icon" type="image/png" href="../assets/soulspire-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --abyss: #0B1019;
+      --midnight: #151928;
+      --midnight-elevated: #1B2135;
+      --soul-gold: #E8BD70;
+      --soul-gold-dim: rgba(232, 189, 112, 0.22);
+      --aether-cyan: #39CFE5;
+      --crystal-violet: #8063BC;
+      --text-primary: #F2F4F8;
+      --text-secondary: #A7B1C6;
+      --text-muted: #76829B;
+      --danger: #F87171;
+      --danger-bg: rgba(248, 113, 113, 0.12);
+      --success: #34D399;
+      --success-bg: rgba(52, 211, 153, 0.12);
+      --border: rgba(232, 189, 112, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(128, 99, 188, 0.18), transparent 42%),
+        radial-gradient(circle at 82% 88%, rgba(57, 207, 229, 0.12), transparent 44%),
+        radial-gradient(circle at 50% 0%, rgba(232, 189, 112, 0.09), transparent 50%),
+        var(--abyss);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.55;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(11, 16, 25, 0.82);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--soul-gold-dim);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      font-size: 1.05rem;
+    }
+
+    .brand-title span { color: var(--soul-gold); }
+
+    .topbar-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .topbar-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .topbar-links a:hover { color: var(--soul-gold); }
+
+    .main-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.25rem 1.15rem 3rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 490px;
+      background: linear-gradient(180deg, rgba(27, 33, 53, 0.92) 0%, rgba(21, 25, 40, 0.96) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 2rem 1.85rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(128, 99, 188, 0.12) inset;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--aether-cyan);
+      background: rgba(57, 207, 229, 0.1);
+      border: 1px solid rgba(57, 207, 229, 0.25);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.45rem;
+      color: #FFFFFF;
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .field { margin-bottom: 1.1rem; }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    input {
+      width: 100%;
+      background: rgba(11, 16, 25, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.72rem 0.9rem;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input.code-input {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--aether-cyan);
+      box-shadow: 0 0 0 3px rgba(57, 207, 229, 0.18);
+    }
+
+    .hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .alert {
+      border-radius: 10px;
+      padding: 0.8rem 0.95rem;
+      font-size: 0.86rem;
+      margin-bottom: 1.15rem;
+      display: none;
+    }
+
+    .alert.visible { display: block; }
+    .alert-error {
+      background: var(--danger-bg);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: #FECACA;
+    }
+    .alert-info {
+      background: rgba(128, 99, 188, 0.16);
+      border: 1px solid rgba(128, 99, 188, 0.38);
+      color: #E9D5FF;
+    }
+    .alert-success {
+      background: var(--success-bg);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: #D1FAE5;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem 1.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--soul-gold) 0%, #C89643 100%);
+      color: #0B1019;
+      box-shadow: 0 8px 22px rgba(232, 189, 112, 0.22);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(232, 189, 112, 0.34);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: rgba(57, 207, 229, 0.12);
+      border: 1px solid rgba(57, 207, 229, 0.32);
+      color: var(--aether-cyan);
+      margin-top: 0.7rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(57, 207, 229, 0.2);
+    }
+
+    .steps-list {
+      list-style: none;
+      margin: 1.15rem 0 1.35rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      background: rgba(11, 16, 25, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 0.68rem 0.85rem;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    .step-num {
+      flex: 0 0 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(232, 189, 112, 0.16);
+      border: 1px solid rgba(232, 189, 112, 0.4);
+      color: var(--soul-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+      margin: 1.35rem 0 1rem;
+    }
+
+    .foot-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .foot-note a { color: var(--aether-cyan); text-decoration: none; }
+    .foot-note a:hover { text-decoration: underline; }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 520px) {
+      .card { padding: 1.5rem 1.25rem; }
+      .topbar { padding: 0.85rem 1rem; }
+      h1 { font-size: 1.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="../assets/soulspire-icon.png" alt="SoulspireXI Crest" />
+      <span class="brand-title">SOULSPIRE <span>XI</span></span>
+    </a>
+    <nav class="topbar-links">
+      <a href="/">Home</a>
+      <a href="https://wiki.soulspirexi.com" target="_blank" rel="noopener">Wiki</a>
+      <a href="https://github.com/Infomatictek/soulspirexi-launcher/releases" target="_blank" rel="noopener">Launcher</a>
+    </nav>
+  </header>
+
+  <main class="main-wrap">
+    <section class="card" aria-live="polite">
+      <div class="eyebrow">Public Alpha &bull; Invite Only</div>
+
+      <!-- Loading State -->
+      <div id="stateLoading">
+        <h1>Checking Registration Status...</h1>
+        <p class="subtitle">Connecting to SoulspireXI alpha services.</p>
+      </div>
+
+      <!-- Registration Closed State -->
+      <div id="stateClosed" class="hidden">
+        <h1>Alpha Registration Closed</h1>
+        <p class="subtitle">
+          New invite-only alpha signups are currently paused while we review tester feedback.
+        </p>
+        <div class="alert alert-info visible">
+          Already have a SoulspireXI account? Existing accounts remain active — launch the game normally to keep playing.
+        </div>
+        <a class="btn btn-primary" href="https://github.com/Infomatictek/soulspirexi-launcher/releases" target="_blank" rel="noopener">
+          Download Launcher
+        </a>
+        <a class="btn btn-secondary" href="https://wiki.soulspirexi.com" target="_blank" rel="noopener">
+          Explore the Player Wiki
+        </a>
+      </div>
+
+      <!-- Registration Form State -->
+      <div id="stateForm" class="hidden">
+        <h1>Create Alpha Account</h1>
+        <p class="subtitle">
+          Enter your single-use invitation code to provision your SoulspireXI game account (1 character per alpha account).
+        </p>
+
+        <div id="formAlert" class="alert alert-error" role="alert"></div>
+
+        <form id="registerForm" novalidate>
+          <div class="field">
+            <label for="inviteCode">Invitation Code</label>
+            <input
+              id="inviteCode"
+              name="invite_code"
+              type="text"
+              class="code-input"
+              placeholder="SSXI-XXXX-XXXX-XXXX"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="username">Game Account Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="e.g. Adventurer01"
+              minlength="4"
+              maxlength="15"
+              autocomplete="username"
+              required
+            />
+            <div class="hint">4–15 characters, starts with a letter, letters/numbers/underscores only.</div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              minlength="8"
+              maxlength="64"
+              autocomplete="new-password"
+              required
+            />
+            <div class="hint">Minimum 8 characters. Do not reuse passwords from other services.</div>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              name="confirm_password"
+              type="password"
+              minlength="8"
+              maxlength="64"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+
+          <button id="submitBtn" type="submit" class="btn btn-primary">
+            Create Game Account
+          </button>
+        </form>
+
+        <div class="divider"></div>
+        <p class="foot-note">
+          Already registered? <a href="https://github.com/Infomatictek/soulspirexi-launcher/releases" target="_blank" rel="noopener">Download the SoulspireXI Launcher</a> and log in directly.
+        </p>
+      </div>
+
+      <!-- Success State -->
+      <div id="stateSuccess" class="hidden">
+        <h1>Account Ready</h1>
+        <p class="subtitle">
+          Welcome to SoulspireXI, <strong id="createdUsername" style="color: var(--soul-gold);"></strong>.
+        </p>
+        <div class="alert alert-success visible">
+          Your alpha game account has been created and your invitation code has been redeemed.
+        </div>
+        <ol class="steps-list">
+          <li>
+            <span class="step-num">1</span>
+            <span>Download and run the <strong>SoulspireXI Launcher</strong> for Windows below.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span>Let the launcher sync client files automatically, then click <strong>Play</strong>.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span>Log in with the username and password you just created, create your character, and enter Vana'diel.</span>
+          </li>
+        </ol>
+        <a class="btn btn-primary" href="https://github.com/Infomatictek/soulspirexi-launcher/releases" target="_blank" rel="noopener">
+          Download SoulspireXI Launcher
+        </a>
+        <a class="btn btn-secondary" href="https://wiki.soulspirexi.com" target="_blank" rel="noopener">
+          Read the 66 Souls Wiki
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STATUS_URL = '/api/combat/public/register/status';
+      const REGISTER_URL = '/api/combat/public/register';
+      const USERNAME_RE = /^[A-Za-z][A-Za-z0-9_]{3,14}$/;
+
+      const elLoading = document.getElementById('stateLoading');
+      const elClosed = document.getElementById('stateClosed');
+      const elForm = document.getElementById('stateForm');
+      const elSuccess = document.getElementById('stateSuccess');
+      const elAlert = document.getElementById('formAlert');
+      const elCreatedUser = document.getElementById('createdUsername');
+
+      const form = document.getElementById('registerForm');
+      const inviteIn = document.getElementById('inviteCode');
+      const userIn = document.getElementById('username');
+      const passIn = document.getElementById('password');
+      const confirmIn = document.getElementById('confirmPassword');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function showState(target) {
+        [elLoading, elClosed, elForm, elSuccess].forEach((el) => el.classList.add('hidden'));
+        target.classList.remove('hidden');
+      }
+
+      function showError(msg) {
+        elAlert.textContent = msg;
+        elAlert.classList.add('visible');
+      }
+
+      function clearError() {
+        elAlert.textContent = '';
+        elAlert.classList.remove('visible');
+      }
+
+      // Optional ?code= prefill from invite link
+      const params = new URLSearchParams(window.location.search || '');
+      const prefillCode = (params.get('code') || '').trim();
+      if (prefillCode) {
+        inviteIn.value = prefillCode.toUpperCase();
+      }
+
+      async function checkStatus() {
+        try {
+          const res = await fetch(STATUS_URL, { cache: 'no-store' });
+          if (!res.ok) throw new Error('status_unavailable');
+          const data = await res.json();
+          if (data && data.registration_open === true) {
+            showState(elForm);
+          } else {
+            showState(elClosed);
+          }
+        } catch (_) {
+          showState(elClosed);
+        }
+      }
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        clearError();
+
+        const invite_code = inviteIn.value.trim().toUpperCase();
+        const username = userIn.value.trim();
+        const password = passIn.value;
+        const confirm_password = confirmIn.value;
+
+        if (invite_code.replace(/[^A-Z0-9]/g, '').length < 10) {
+          showError('Please enter a valid SoulspireXI invitation code.');
+          inviteIn.focus();
+          return;
+        }
+        if (!USERNAME_RE.test(username)) {
+          showError('Username must be 4-15 characters, start with a letter, and use only letters, numbers, or underscores.');
+          userIn.focus();
+          return;
+        }
+        if (password.length < 8 || password.length > 64) {
+          showError('Password must be between 8 and 64 characters.');
+          passIn.focus();
+          return;
+        }
+        if (password !== confirm_password) {
+          showError('Passwords do not match.');
+          confirmIn.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating Account...';
+
+        try {
+          const res = await fetch(REGISTER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ invite_code, username, password, confirm_password }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data.ok) {
+            passIn.value = '';
+            confirmIn.value = '';
+            elCreatedUser.textContent = data.username || username;
+            showState(elSuccess);
+            return;
+          }
+          if (res.status === 403 && data.error === 'registration_closed') {
+            showState(elClosed);
+            return;
+          }
+          showError(data.message || 'Unable to complete registration. Please check your details and try again.');
+        } catch (_) {
+          showError('Could not reach the registration service. Please try again shortly.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Game Account';
+        }
+      });
+
+      checkStatus();
+    })();
+  </script>
+</body>
+</html>
