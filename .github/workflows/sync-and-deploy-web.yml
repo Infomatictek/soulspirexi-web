@@ -1,0 +1,279 @@
+name: Sync & Deploy SoulspireXI Public Website
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  repository_dispatch:
+    types:
+      - public-game-data-updated
+  schedule:
+    - cron: '30 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      sync_from_registry:
+        description: 'Pull latest validated /api/v1/*.json from Infomatictek/soulspirexi main'
+        required: false
+        default: true
+        type: boolean
+      mode:
+        description: 'Deploy or rollback on VPS'
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+          - deploy
+          - rollback
+      dry_run:
+        description: 'Validate and stage release tarball without connecting to VPS'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: deploy-soulspirexi-web-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync-and-validate:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      expected_data_version: ${{ steps.meta.outputs.data_version }}
+      expected_registry_hash: ${{ steps.meta.outputs.registry_hash }}
+    steps:
+      - name: Checkout soulspirexi-web
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 10
+
+      - name: Checkout authoritative Infomatictek/soulspirexi main for Public API v1 sync
+        if: >-
+          github.event_name == 'repository_dispatch' ||
+          github.event_name == 'schedule' ||
+          (github.event_name == 'workflow_dispatch' && inputs.sync_from_registry != false)
+        uses: actions/checkout@v7
+        with:
+          repository: Infomatictek/soulspirexi
+          ref: main
+          token: ${{ secrets.SOULSPIRE_REGISTRY_READ_TOKEN || github.token }}
+          path: .registry-repo
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync validated /api/v1/*.json from authoritative registry repository
+        if: >-
+          github.event_name == 'repository_dispatch' ||
+          github.event_name == 'schedule' ||
+          (github.event_name == 'workflow_dispatch' && inputs.sync_from_registry != false)
+        run: |
+          set -euo pipefail
+          if [ ! -f .registry-repo/site/api/v1/manifest.json ]; then
+            echo "ERROR: Missing .registry-repo/site/api/v1/manifest.json" >&2
+            exit 1
+          fi
+          mkdir -p api/v1
+          cp -f .registry-repo/site/api/v1/*.json api/v1/
+
+      - name: Check JavaScript syntax and run frontend regression tests
+        run: |
+          node --check assets/soulspire-data.js
+          node --test tests/test_web_data_sync.mjs
+
+      - name: Validate web assets, Public API v1 integrity, and build deterministic bundle
+        run: |
+          bash -n scripts/deploy-web-vps.sh
+          python3 scripts/validate-web-assets.py \
+            --web-dir . \
+            --output-tar dist/web-release.tar.gz \
+            --git-sha "${{ github.sha }}" \
+            --git-ref "${{ github.ref_name }}" \
+            --run-id "${{ github.run_id }}"
+
+      - name: Commit synced Public API v1 snapshot back to main when updated
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          (github.event_name == 'repository_dispatch' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.sync_from_registry != false))
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- api/v1; then
+            echo "api/v1 is already up to date with authoritative registry."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/v1/*.json
+          git commit -m "chore(api): sync Public API v1 from authoritative SoulspireXI registry [skip ci]"
+          git push origin HEAD:refs/heads/main
+
+      - name: Record expected Public API v1 version outputs
+        id: meta
+        run: |
+          python3 - >> "$GITHUB_OUTPUT" <<'PY'
+          import json
+          from pathlib import Path
+          m = json.loads(Path("api/v1/manifest.json").read_text(encoding="utf-8"))
+          print(f"data_version={m['dataVersion']}")
+          print(f"registry_hash={m['registryHash']}")
+          PY
+
+      - name: Upload staged web release bundle
+        uses: actions/upload-artifact@v7
+        with:
+          name: web-site-release
+          path: |
+            dist/web-release.tar.gz
+            scripts/deploy-web-vps.sh
+          retention-days: 7
+
+  deploy-to-vps:
+    needs: sync-and-validate
+    if: >-
+      github.event_name != 'pull_request' &&
+      (github.ref == 'refs/heads/main' || github.event_name == 'repository_dispatch' || github.event_name == 'schedule') &&
+      (github.event_name != 'workflow_dispatch' || inputs.dry_run != true)
+    runs-on: ubuntu-latest
+    environment: web-production
+    steps:
+      - name: Download staged web release bundle
+        uses: actions/download-artifact@v8
+        with:
+          name: web-site-release
+          path: staged
+
+      - name: Verify required VPS deployment secrets are configured
+        env:
+          WEB_VPS_HOST: ${{ secrets.WEB_VPS_HOST }}
+          WEB_VPS_USER: ${{ secrets.WEB_VPS_USER }}
+          WEB_VPS_SSH_KEY: ${{ secrets.WEB_VPS_SSH_KEY }}
+          WEB_VPS_HOST_KEY: ${{ secrets.WEB_VPS_HOST_KEY }}
+          WEB_VPS_WEBROOT: ${{ secrets.WEB_VPS_WEBROOT }}
+        run: |
+          set -euo pipefail
+          for var in WEB_VPS_HOST WEB_VPS_USER WEB_VPS_SSH_KEY WEB_VPS_HOST_KEY WEB_VPS_WEBROOT; do
+            if [ -z "${!var:-}" ]; then
+              echo "ERROR: Missing required secret $var in GitHub Environment 'web-production'." >&2
+              exit 1
+            fi
+          done
+          if ! [[ "$WEB_VPS_WEBROOT" =~ ^/[A-Za-z0-9._/-]+$ ]] || [[ "$WEB_VPS_WEBROOT" == *".."* ]]; then
+            echo "ERROR: Unsafe WEB_VPS_WEBROOT format." >&2
+            exit 1
+          fi
+
+      - name: Configure strict SSH identity and host key verification
+        env:
+          WEB_VPS_SSH_KEY: ${{ secrets.WEB_VPS_SSH_KEY }}
+          WEB_VPS_HOST_KEY: ${{ secrets.WEB_VPS_HOST_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          printf '%s\n' "$WEB_VPS_SSH_KEY" | tr -d '\r' > "$HOME/.ssh/web_deploy_key"
+          chmod 600 "$HOME/.ssh/web_deploy_key"
+          ssh-keygen -y -f "$HOME/.ssh/web_deploy_key" >/dev/null
+          printf '%s\n' "$WEB_VPS_HOST_KEY" | tr -d '\r' > "$HOME/.ssh/web_known_hosts"
+          chmod 600 "$HOME/.ssh/web_known_hosts"
+
+      - name: Stage and atomically publish (or rollback) on VPS
+        env:
+          WEB_VPS_HOST: ${{ secrets.WEB_VPS_HOST }}
+          WEB_VPS_PORT: ${{ secrets.WEB_VPS_PORT }}
+          WEB_VPS_USER: ${{ secrets.WEB_VPS_USER }}
+          WEB_VPS_WEBROOT: ${{ secrets.WEB_VPS_WEBROOT }}
+          DEPLOY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'deploy' }}
+        run: |
+          set -euo pipefail
+          PORT="${WEB_VPS_PORT:-22}"
+          SSH_OPTS=(
+            -i "$HOME/.ssh/web_deploy_key"
+            -p "$PORT"
+            -o "UserKnownHostsFile=$HOME/.ssh/web_known_hosts"
+            -o StrictHostKeyChecking=yes
+            -o IdentitiesOnly=yes
+            -o BatchMode=yes
+            -o ConnectTimeout=15
+          )
+          SCP_OPTS=(
+            -i "$HOME/.ssh/web_deploy_key"
+            -P "$PORT"
+            -o "UserKnownHostsFile=$HOME/.ssh/web_known_hosts"
+            -o StrictHostKeyChecking=yes
+            -o IdentitiesOnly=yes
+            -o BatchMode=yes
+            -o ConnectTimeout=15
+          )
+          REMOTE_TMP="$(ssh "${SSH_OPTS[@]}" "${WEB_VPS_USER}@${WEB_VPS_HOST}" 'mktemp -d /tmp/soulspire-web-upload.XXXXXX')"
+          trap 'ssh "${SSH_OPTS[@]}" "${WEB_VPS_USER}@${WEB_VPS_HOST}" "rm -rf -- '\''${REMOTE_TMP}'\''" || true' EXIT
+
+          scp "${SCP_OPTS[@]}" staged/scripts/deploy-web-vps.sh "${WEB_VPS_USER}@${WEB_VPS_HOST}:${REMOTE_TMP}/deploy-web-vps.sh"
+          if [ "$DEPLOY_MODE" = "rollback" ]; then
+            ssh "${SSH_OPTS[@]}" "${WEB_VPS_USER}@${WEB_VPS_HOST}" \
+              "bash '${REMOTE_TMP}/deploy-web-vps.sh' --rollback --webroot '${WEB_VPS_WEBROOT}'"
+          else
+            scp "${SCP_OPTS[@]}" staged/dist/web-release.tar.gz "${WEB_VPS_USER}@${WEB_VPS_HOST}:${REMOTE_TMP}/web-release.tar.gz"
+            ssh "${SSH_OPTS[@]}" "${WEB_VPS_USER}@${WEB_VPS_HOST}" \
+              "bash '${REMOTE_TMP}/deploy-web-vps.sh' --webroot '${WEB_VPS_WEBROOT}' --bundle '${REMOTE_TMP}/web-release.tar.gz'"
+          fi
+
+      - name: Optional Cloudflare targeted cache purge
+        env:
+          CF_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WEB_URL: ${{ vars.WEB_PUBLIC_URL || 'https://soulspirexi.com' }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CF_ZONE_ID:-}" ] || [ -z "${CF_API_TOKEN:-}" ]; then
+            echo "Cloudflare cache purge secrets not configured; skipping."
+            exit 0
+          fi
+          curl -fsS --max-time 30 -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data "{\"files\":[\"${WEB_URL}/\",\"${WEB_URL}/index.html\",\"${WEB_URL}/assets/soulspire-data.js\",\"${WEB_URL}/api/v1/manifest.json\",\"${WEB_URL}/api/v1/jobs.json\",\"${WEB_URL}/api/v1/souls.json\",\"${WEB_URL}/api/v1/abilities.json\",\"${WEB_URL}/api/v1/spells.json\",\"${WEB_URL}/api/v1/traits.json\",\"${WEB_URL}/api/v1/systems.json\",\"${WEB_URL}/api/v1/changelog.json\"]}" \
+            | grep -q '"success":true'
+
+      - name: Verify live https://soulspirexi.com serves expected Public API v1 version
+        env:
+          WEB_URL: ${{ vars.WEB_PUBLIC_URL || 'https://soulspirexi.com' }}
+          EXPECTED_VERSION: ${{ needs.sync-and-validate.outputs.expected_data_version }}
+          EXPECTED_HASH: ${{ needs.sync-and-validate.outputs.expected_registry_hash }}
+          DEPLOY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'deploy' }}
+        run: |
+          set -euo pipefail
+          for path in "/" "/index.html" "/assets/soulspire-data.js" "/api/v1/manifest.json" "/api/v1/souls.json" "/api/v1/jobs.json"; do
+            code="$(curl -fsS --max-time 30 -o /dev/null -w '%{http_code}' "${WEB_URL}${path}?_verify=$(date +%s)")"
+            echo "GET ${WEB_URL}${path} -> ${code}"
+            test "$code" = "200"
+          done
+
+          if [ "$DEPLOY_MODE" = "deploy" ]; then
+            python3 - "$WEB_URL" "$EXPECTED_VERSION" "$EXPECTED_HASH" <<'PY'
+          import json, sys, time, urllib.request
+          base, exp_ver, exp_hash = sys.argv[1], sys.argv[2], sys.argv[3]
+          req = urllib.request.Request(f"{base}/api/v1/manifest.json?t={int(time.time())}", headers={"Cache-Control": "no-cache"})
+          manifest = json.loads(urllib.request.urlopen(req, timeout=20).read().decode("utf-8"))
+          if manifest.get("dataVersion") != exp_ver or manifest.get("registryHash") != exp_hash:
+              raise SystemExit(f"Live version mismatch: got ({manifest.get('dataVersion')}, {manifest.get('registryHash')}), expected ({exp_ver}, {exp_hash})")
+          if manifest.get("counts", {}).get("souls") != 66 or manifest.get("counts", {}).get("jobs") != 22:
+              raise SystemExit(f"Unexpected live counts: {manifest.get('counts')}")
+          print(f"OK: Live {base} verified serving dataVersion={exp_ver}, registryHash={exp_hash} (66 Souls / 22 Jobs)")
+          PY
+          fi
