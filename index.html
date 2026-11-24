@@ -201,14 +201,8 @@
       100% { opacity: 0; }
     }
 
-    @keyframes emblemFloat {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-7px) scale(1.015); }
-    }
-
     .animate-aether-breath { animation: aetherBreath 4.6s ease-in-out infinite; }
     .animate-scroll-dot { animation: scrollPulse 2.3s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
-    .animate-emblem-float { animation: emblemFloat 6.5s ease-in-out infinite; }
 
     /* Smooth Scroll-Triggered Reveal */
     .reveal {
@@ -361,7 +355,7 @@
         <!-- Ambient Dual-Aether (Cyan & Gold) Outer Radial Glow behind the Emblem -->
         <div class="absolute -inset-4 rounded-full bg-[radial-gradient(circle_at_35%_45%,rgba(56,232,255,0.22)_0%,transparent_58%),radial-gradient(circle_at_68%_50%,rgba(245,194,107,0.2)_0%,transparent_58%),radial-gradient(circle_at_50%_30%,rgba(157,123,255,0.16)_0%,transparent_65%)] blur-2xl animate-aether-breath pointer-events-none" aria-hidden="true"></div>
 
-        <div class="relative z-10 w-full h-full animate-emblem-float">
+        <div class="relative z-10 w-full h-full">
           <img
             src="./assets/soulspire-icon.png?v=3"
             alt="Soulspire XI Shattered Spire Emblem"
