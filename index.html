@@ -272,11 +272,12 @@
       </a>
 
       <!-- Center: Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-8" aria-label="Primary Navigation">
+      <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
         <a href="#sundering" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">The Sundering</a>
         <a href="#shards" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">The 66 Shards</a>
-        <a href="#perspectives" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">New &amp; Returning</a>
-        <a href="#play" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">Play</a>
+        <a href="#systems" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">Systems</a>
+        <a href="#changelog" class="text-xs font-medium tracking-[0.16em] uppercase text-slateSilver hover:text-stoneIvory transition-colors">Updates</a>
+        <a href="https://wiki.soulspirexi.com/" target="_blank" rel="noopener noreferrer" class="text-xs font-medium tracking-[0.16em] uppercase text-aether-cyan hover:text-stoneIvory transition-colors">Wiki</a>
         <a href="/register/" class="text-xs font-semibold tracking-[0.16em] uppercase text-aether-gold hover:text-stoneIvory transition-colors">Create Account</a>
       </nav>
 
@@ -329,8 +330,9 @@
     <nav class="flex flex-col gap-2 flex-1">
       <a href="#sundering" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">The Sundering</a>
       <a href="#shards" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">The 66 Shards</a>
-      <a href="#perspectives" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">New &amp; Returning</a>
-      <a href="#play" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">Play</a>
+      <a href="#systems" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">Game Systems</a>
+      <a href="#changelog" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-stoneIvory/90 hover:text-aether-gold hover:bg-white/5 transition-colors">Updates</a>
+      <a href="https://wiki.soulspirexi.com/" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-aether-cyan hover:text-stoneIvory hover:bg-white/5 transition-colors">Official Wiki</a>
       <a href="/register/" onclick="closeMobileMenu()" class="px-3 py-3 rounded-md font-cinzel text-sm tracking-[0.14em] uppercase text-aether-gold hover:text-stoneIvory hover:bg-white/5 transition-colors">Create Account</a>
     </nav>
 
@@ -562,6 +564,9 @@
         <p class="text-slateSilver text-sm sm:text-base leading-relaxed">
           Every one of Vana'diel's twenty-two classic jobs can branch into three distinct thematic identities. Explore the three great callings shaping our living realm.
         </p>
+        <p id="shards-sync-meta" class="mt-3 font-mono text-[11px] tracking-[0.16em] uppercase text-slateSilver/70">
+          Synchronizing canonical 66-Soul registry...
+        </p>
       </div>
 
       <!-- Three Interactive Calling Tabs -->
@@ -569,7 +574,7 @@
         <button type="button" role="tab" data-calling="vanguard" onclick="selectCalling('vanguard')"
           class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
           <div class="flex items-center justify-between mb-2">
-            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-gold">Calling I &bull; 18 Shards</span>
+            <span id="calling-count-vanguard" class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-gold">Calling I</span>
             <span class="w-2.5 h-2.5 rotate-45 bg-aether-gold"></span>
           </div>
           <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Vanguard &amp; Bastions</h3>
@@ -579,7 +584,7 @@
         <button type="button" role="tab" data-calling="strikers" onclick="selectCalling('strikers')"
           class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
           <div class="flex items-center justify-between mb-2">
-            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-cyan">Calling II &bull; 21 Shards</span>
+            <span id="calling-count-strikers" class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-cyan">Calling II</span>
             <span class="w-2.5 h-2.5 rotate-45 bg-aether-cyan"></span>
           </div>
           <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Unbound Strikers</h3>
@@ -589,7 +594,7 @@
         <button type="button" role="tab" data-calling="tacticians" onclick="selectCalling('tacticians')"
           class="calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer">
           <div class="flex items-center justify-between mb-2">
-            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-violet">Calling III &bull; 27 Shards</span>
+            <span id="calling-count-tacticians" class="font-mono text-[10px] tracking-[0.22em] uppercase text-aether-violet">Calling III</span>
             <span class="w-2.5 h-2.5 rotate-45 bg-aether-violet"></span>
           </div>
           <h3 class="font-cinzel font-bold text-lg tracking-[0.08em] text-stoneIvory mb-1">Tacticians &amp; Menders</h3>
@@ -599,7 +604,32 @@
 
       <!-- Dynamic Calling Preview Panel -->
       <div id="calling-preview-panel" class="crag-panel rounded-2xl p-6 sm:p-9 lg:p-10 reveal">
-        <!-- Populated dynamically by JS -->
+        <!-- Populated dynamically by assets/soulspire-data.js from /api/v1/ -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 4B. GAMEPLAY SYSTEMS & FEATURE AVAILABILITY (API-DRIVEN)              -->
+  <!-- ===================================================================== -->
+  <section id="systems" class="relative py-24 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10 bg-gradient-to-b from-abyss via-midnight/40 to-abyss">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mb-10 reveal">
+        <span class="font-mono text-xs tracking-[0.28em] uppercase text-aether-gold block mb-3">Live Realm &amp; Horizon</span>
+        <h2 class="font-cinzel font-bold text-3xl sm:text-4xl lg:text-5xl tracking-[0.12em] uppercase text-ivory-gold mb-4">
+          Systems &amp; Feature Availability
+        </h2>
+        <p class="text-slateSilver text-sm sm:text-base leading-relaxed">
+          Clear separation between gameplay systems currently deployed on the live server and upcoming expansions in testing.
+        </p>
+      </div>
+
+      <div id="systems-release-banner" class="crag-panel rounded-xl p-5 sm:p-6 mb-8 reveal">
+        <!-- Populated dynamically from /api/v1/systems.json -->
+      </div>
+
+      <div id="systems-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
+        <!-- Populated dynamically from /api/v1/systems.json -->
       </div>
     </div>
   </section>
@@ -765,6 +795,30 @@
   </section>
 
   <!-- ===================================================================== -->
+  <!-- 6B. PUBLIC PLAYER-VISIBLE CHANGELOG (API-DRIVEN)                      -->
+  <!-- ===================================================================== -->
+  <section id="changelog" class="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-stoneIvory/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 reveal">
+        <div>
+          <span class="font-mono text-xs tracking-[0.28em] uppercase text-aether-cyan block mb-3">Realm Chronicles</span>
+          <h2 class="font-cinzel font-bold text-3xl sm:text-4xl tracking-[0.12em] uppercase text-ivory-gold">
+            Recent Player Updates
+          </h2>
+        </div>
+        <a href="./api/v1/manifest.json" target="_blank" rel="noopener noreferrer"
+          class="font-mono text-[11px] uppercase tracking-[0.16em] text-slateSilver hover:text-aether-cyan transition-colors">
+          Public Data API v1 &rarr;
+        </a>
+      </div>
+
+      <div id="changelog-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6 reveal">
+        <!-- Populated dynamically from /api/v1/changelog.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
   <!-- 7. FINAL CALL TO ACTION & CLEAN AAA FOOTER                            -->
   <!-- ===================================================================== -->
   <section id="play" class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
@@ -828,8 +882,9 @@
           <ul class="space-y-2.5 text-sm text-slateSilver">
             <li><a href="#sundering" class="hover:text-stoneIvory transition-colors">The Sundering</a></li>
             <li><a href="#shards" class="hover:text-stoneIvory transition-colors">The 66 Shards</a></li>
-            <li><a href="#perspectives" class="hover:text-stoneIvory transition-colors">New &amp; Returning</a></li>
-            <li><a href="#play" class="hover:text-stoneIvory transition-colors">Play Soulspire XI</a></li>
+            <li><a href="#systems" class="hover:text-stoneIvory transition-colors">Systems &amp; Availability</a></li>
+            <li><a href="#changelog" class="hover:text-stoneIvory transition-colors">Recent Updates</a></li>
+            <li><a href="https://wiki.soulspirexi.com/" target="_blank" rel="noopener noreferrer" class="text-aether-cyan hover:text-stoneIvory transition-colors">Official Encyclopedia Wiki</a></li>
           </ul>
         </div>
 
@@ -846,14 +901,34 @@
       </div>
 
       <!-- Non-Commercial Fan Project Disclaimer -->
-      <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slateSilver/55 leading-relaxed">
-        <p class="max-w-3xl">
-          Soulspire XI is a non-commercial, fan-made private server project created out of love for classic online RPGs. Final Fantasy XI and all related trademarks, worlds, and assets belong to Square Enix Co., Ltd. Soulspire XI is not affiliated with, endorsed by, or sponsored by Square Enix.
-        </p>
-        <span class="font-mono text-[11px] shrink-0">&copy; 2026 Soulspire XI</span>
+      <div class="pt-8 flex flex-col gap-3 text-xs text-slateSilver/55 leading-relaxed">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p class="max-w-3xl">
+            Soulspire XI is a non-commercial, fan-made private server project created out of love for classic online RPGs. Final Fantasy XI and all related trademarks, worlds, and assets belong to Square Enix Co., Ltd. Soulspire XI is not affiliated with, endorsed by, or sponsored by Square Enix.
+          </p>
+          <span class="font-mono text-[11px] shrink-0">&copy; 2026 Soulspire XI</span>
+        </div>
+        <div class="pt-2 border-t border-stoneIvory/5 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] text-slateSilver/55">
+          <span id="data-version-footer">Public Game Data API v1</span>
+          <a href="./api/v1/manifest.json" target="_blank" rel="noopener noreferrer" class="hover:text-aether-cyan transition-colors">api/v1/manifest.json</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE SOUL DETAIL MODAL (STABLE PERMANENT ID + REDIRECTS)       -->
+  <!-- ===================================================================== -->
+  <div id="soul-detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/82 backdrop-blur-md">
+    <div class="crag-panel relative w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl p-6 sm:p-8 border-stoneIvory/25 shadow-[0_30px_90px_rgba(0,0,0,0.95)]">
+      <button type="button" onclick="window.SoulspireDataUI.closeSoulDetail()" aria-label="Close Soul details" class="absolute top-5 right-5 p-2 rounded-md text-slateSilver hover:text-stoneIvory hover:bg-white/5 cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div id="soul-detail-body"></div>
+    </div>
+  </div>
 
   <!-- ===================================================================== -->
   <!-- INTERACTIVE GETTING STARTED / LAUNCHER MODAL                          -->
@@ -1119,394 +1194,9 @@
     }
 
     /* -----------------------------------------------------------------------
-       5. INTERACTIVE SIXTY-SIX SHARDS & THREE CALLINGS SHOWCASE (LORE-ONLY)
+       5. SIXTY-SIX SHARDS, SYSTEMS & CHANGELOG ARE LOADED DYNAMICALLY
+          FROM /api/v1/*.json VIA ./assets/soulspire-data.js
     ----------------------------------------------------------------------- */
-    const callingsData = {
-      vanguard: {
-        badge: 'Gold & Carved Stone Resonance',
-        badgeClass: 'text-aether-gold bg-aether-gold/12 border-aether-gold/30',
-        title: 'The Vanguard & Bastions',
-        fantasy:
-          'Unyielding champions whose discipline and resolve turn sheer presence into an impenetrable wall. Whether standing firm against towering beasts or shielding allies from ruin, these archetypes embody grit, guardianship, and steadfast poise.',
-        roleFocus: 'Frontline Presence & Guardianship',
-        toneBorder: 'border-aether-gold/45 bg-aether-gold/10 shadow-[0_0_28px_-8px_rgba(245,194,107,0.35)]',
-        chipClass: 'border-aether-gold/35 bg-aether-gold/10 text-aether-gold',
-        cardHover: 'hover:border-aether-gold/45',
-        accentDot: 'bg-aether-gold',
-        tags: ['All', 'Tank', 'Tank · Hybrid Support'],
-      },
-      strikers: {
-        badge: 'Aether Cyan & Amethyst Resonance',
-        badgeClass: 'text-aether-cyan bg-aether-cyan/12 border-aether-cyan/30',
-        title: 'The Unbound Strikers',
-        fantasy:
-          'Relentless blades and arcane conduits who channel raw destructive momentum to shatter overwhelming foes. Built for adventurers who thrive on decisive poise, daring flair, and turning every opening into an unforgettable legend.',
-        roleFocus: 'Relentless Offense & Arcane Mastery',
-        toneBorder: 'border-aether-cyan/50 bg-aether-cyan/10 shadow-[0_0_28px_-8px_rgba(56,232,255,0.35)]',
-        chipClass: 'border-aether-cyan/35 bg-aether-cyan/10 text-aether-cyan',
-        cardHover: 'hover:border-aether-cyan/45',
-        accentDot: 'bg-aether-cyan',
-        tags: ['All', 'Damage'],
-      },
-      tacticians: {
-        badge: 'Cyan & Celestial Gold Harmony',
-        badgeClass: 'text-aether-violet bg-aether-violet/15 border-aether-violet/35',
-        title: 'The Tacticians & Menders',
-        fantasy:
-          'Battlefield conductors and life-weavers who reshape the rhythm of every journey through foresight, harmony, and restoration. Ideal for adventurers who love empowering their company, reading the flow of fate, and turning desperate moments into triumph.',
-        roleFocus: 'Harmony, Restoration & Command',
-        toneBorder: 'border-aether-violet/55 bg-aether-violet/12 shadow-[0_0_28px_-8px_rgba(157,123,255,0.38)]',
-        chipClass: 'border-aether-violet/40 bg-aether-violet/15 text-purple-200',
-        cardHover: 'hover:border-aether-violet/50',
-        accentDot: 'bg-aether-violet',
-        tags: ['All', 'Healer', 'Combat Healer', 'Support', 'Hybrid Support'],
-      },
-    };
-
-    const sixtySixSouls = [
-      // WAR — Warrior
-      { name: 'Spartan', jobCode: 'WAR', jobName: 'Warrior', calling: 'vanguard', tag: 'Tank', lore: 'An unbroken spear-and-buckler stalwart forged in the discipline of the ancient phalanx, holding the line where lesser shields shatter.' },
-      { name: 'Berserker', jobCode: 'WAR', jobName: 'Warrior', calling: 'strikers', tag: 'Damage', lore: 'A storm of untamed martial fury who surrenders caution to the roar of battle, cleaving through ranks with primal ferocity.' },
-      { name: 'Commander', jobCode: 'WAR', jobName: 'Warrior', calling: 'tacticians', tag: 'Support', lore: 'A seasoned war-captain whose rallying cries and battlefield formations turn scattered adventurers into an ironclad company.' },
-
-      // MNK — Monk
-      { name: 'Sensei', jobCode: 'MNK', jobName: 'Monk', calling: 'vanguard', tag: 'Tank', lore: 'A serene master of the quarterstaff and martial stillness who turns an opponent’s own momentum into poise and unshakable footing.' },
-      { name: 'Black Belt', jobCode: 'MNK', jobName: 'Monk', calling: 'strikers', tag: 'Damage', lore: 'A living instrument of disciplined fist and foot, channeling lifelong temple training into a seamless tempest of strikes.' },
-      { name: 'Chi Weaver', jobCode: 'MNK', jobName: 'Monk', calling: 'tacticians', tag: 'Healer', lore: 'An empty-handed mystic who draws luminous life-force from within, guiding soothing currents of chi across the fray.' },
-
-      // WHM — White Mage
-      { name: 'Zealot', jobCode: 'WHM', jobName: 'White Mage', calling: 'strikers', tag: 'Damage', lore: 'A militant crusader of sacred light who walks the frontlines with staff in hand, answering darkness with radiant conviction.' },
-      { name: 'Bishop', jobCode: 'WHM', jobName: 'White Mage', calling: 'tacticians', tag: 'Healer', lore: 'A high steward of sanctuary and solemn grace whose luminous benedictions shelter the faithful before ruin can fall.' },
-      { name: 'Valkyrie', jobCode: 'WHM', jobName: 'White Mage', calling: 'tacticians', tag: 'Support', lore: 'A winged-spear sentinel of the sacred order who watches over vulnerable allies and steadies their resolve amidst chaos.' },
-
-      // BLM — Black Mage
-      { name: 'Necromancer', jobCode: 'BLM', jobName: 'Black Mage', calling: 'vanguard', tag: 'Tank · Hybrid Support', lore: 'A forbidden scholar of twilight and the scythe who binds restless echoes of the fallen to stand watch or whisper dark sorcery.' },
-      { name: 'Astromancer', jobCode: 'BLM', jobName: 'Black Mage', calling: 'strikers', tag: 'Damage', lore: 'A stargazing archmage who reads celestial alignments to call down cataclysmic astral forces upon Vana’diel’s mightiest foes.' },
-      { name: 'Channeler', jobCode: 'BLM', jobName: 'Black Mage', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A selfless conduit of arcane current who binds their own aetheric flow to an ally, amplifying a fellow caster’s grandest incantations.' },
-
-      // RDM — Red Mage
-      { name: 'Crimson Duelist', jobCode: 'RDM', jobName: 'Red Mage', calling: 'vanguard', tag: 'Tank', lore: 'An aristocratic fencer who weaves dueling elegance with subtle hexes, meeting overwhelming foes blade-to-blade with unruffled poise.' },
-      { name: 'Scarlet Weaver', jobCode: 'RDM', jobName: 'Red Mage', calling: 'strikers', tag: 'Damage', lore: 'A virtuoso of crimson duality who balances keen swordplay and refined sorcery, shifting gracefully between steel and spell.' },
-      { name: 'Royal Tactician', jobCode: 'RDM', jobName: 'Red Mage', calling: 'tacticians', tag: 'Support', lore: 'A courtly strategist of San d’Orian and Jeunoan tradition who reads the ebb of battle to issue decisive, tailored commands.' },
-
-      // THF — Thief
-      { name: 'Phantom', jobCode: 'THF', jobName: 'Thief', calling: 'vanguard', tag: 'Tank', lore: 'A taunting shadow-dancer who draws every eye and blade onto themselves, slipping past danger like smoke through clenched fingers.' },
-      { name: 'Bandit', jobCode: 'THF', jobName: 'Thief', calling: 'strikers', tag: 'Damage', lore: 'A ruthless opportunist of back-alley steel who spots the faintest crack in a foe’s guard and strikes without hesitation.' },
-      { name: 'Trickster', jobCode: 'THF', jobName: 'Thief', calling: 'tacticians', tag: 'Support', lore: 'A silver-tongued schemer of misdirection and sleight of hand who orchestrates the flow of attention across the battlefield.' },
-
-      // PLD — Paladin
-      { name: 'Defender', jobCode: 'PLD', jobName: 'Paladin', calling: 'vanguard', tag: 'Tank', lore: 'An oathbound bastion of royal steel who steps willingly into harm’s path, interposing shield and sacred vow between danger and comrades.' },
-      { name: 'Oathbreaker', jobCode: 'PLD', jobName: 'Paladin', calling: 'strikers', tag: 'Damage', lore: 'A grim knight who casts aside gentle restraint for a singular, uncompromising vow of judgment carried on a heavy greatsword.' },
-      { name: 'Templar', jobCode: 'PLD', jobName: 'Paladin', calling: 'tacticians', tag: 'Combat Healer', lore: 'A frontline hospitaller whose consecrated swings and steadfast presence bring dawn-lit solace to wounded companions in the thick of battle.' },
-
-      // DRK — Dark Knight
-      { name: 'Dreadnought', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'vanguard', tag: 'Tank', lore: 'An imposing juggernaut of dark plate and crimson resolve who drinks deeply of shadow to outlast the fiercest onslaught.' },
-      { name: 'Reaper', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'strikers', tag: 'Damage', lore: 'A patient executioner of the curved scythe who watches for a foe’s fleeting moment of vulnerability and harvests it in silence.' },
-      { name: 'Scourge', jobCode: 'DRK', jobName: 'Dark Knight', calling: 'tacticians', tag: 'Support', lore: 'A feared hex-bearer who lays targeted maledictions upon a monster’s deadliest nature, stifling ruin before it can unfold.' },
-
-      // BST — Beastmaster
-      { name: 'Alpha Warden', jobCode: 'BST', jobName: 'Beastmaster', calling: 'vanguard', tag: 'Tank', lore: 'A fierce pack-leader who stands shoulder-to-shoulder with a loyal guardian beast, sharing every hardship through an unbreakable bond.' },
-      { name: 'Untamed', jobCode: 'BST', jobName: 'Beastmaster', calling: 'strikers', tag: 'Damage', lore: 'A wild-hearted hunter who moves in primal tandem with a ferocious companion, turning master and beast into one relentless predator.' },
-      { name: 'Beastspeaker', jobCode: 'BST', jobName: 'Beastmaster', calling: 'tacticians', tag: 'Support', lore: 'A keen naturalist of Vana’diel’s ecosystems who reads a creature’s lineage and guides companions toward its natural vulnerability.' },
-
-      // BRD — Bard
-      { name: 'Minstrel', jobCode: 'BRD', jobName: 'Bard', calling: 'vanguard', tag: 'Tank', lore: 'A defiant troubadour whose resonant chords and iron-willed ballads command the attention of titans while fortifying their own spirit.' },
-      { name: 'Adventurer', jobCode: 'BRD', jobName: 'Bard', calling: 'strikers', tag: 'Damage', lore: 'A dashing blade-dancer of the open road who weaves twin-steel flourishes into vibrant, echoing melodies.' },
-      { name: 'Musician', jobCode: 'BRD', jobName: 'Bard', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A concert virtuoso of Vana’diel’s ancient harmonies whose dramatic crescendos both uplift companions and shatter foes with sound.' },
-
-      // RNG — Ranger
-      { name: 'Huntsman', jobCode: 'RNG', jobName: 'Ranger', calling: 'vanguard', tag: 'Tank · Hybrid Support', lore: 'A frontier tracker bonded to a fierce wild companion, directing primal loyalty from the thick of the hunt to hold the wilderness at bay.' },
-      { name: 'Sniper', jobCode: 'RNG', jobName: 'Ranger', calling: 'strikers', tag: 'Damage', lore: 'A dead-eyed marksman of quiet patience who claims a clear sightline and lets a single, unerring shot speak across the horizon.' },
-      { name: 'Arcane Archer', jobCode: 'RNG', jobName: 'Ranger', calling: 'tacticians', tag: 'Support', lore: 'A mystic fletching artisan who inscribes elemental resonance onto every arrow, painting luminous marks for allies to awaken.' },
-
-      // SAM — Samurai
-      { name: 'Ronin', jobCode: 'SAM', jobName: 'Samurai', calling: 'vanguard', tag: 'Tank', lore: 'A wandering master of the great katana whose serene clarity absorbs terrible blows with stoic grace before shedding their weight.' },
-      { name: 'Imperial Archer', jobCode: 'SAM', jobName: 'Samurai', calling: 'tacticians', tag: 'Support', lore: 'A noble retainer of Far Eastern courtly arms who bridges distant bowcraft and drawing-blade mastery in a single unbroken cadence.' },
-      { name: 'Warlord', jobCode: 'SAM', jobName: 'Samurai', calling: 'tacticians', tag: 'Hybrid Support', lore: 'A commanding shogunate champion whose decisive bladework kindles an inspiring martial aura across every warrior at their side.' },
-
-      // NIN — Ninja
-      { name: 'Kagemusha', jobCode: 'NIN', jobName: 'Ninja', calling: 'vanguard', tag: 'Tank', lore: 'A phantom body-double of drifting ash and lantern smoke who bewilders foes with shifting decoys and vanishing silhouettes.' },
-      { name: 'Shinobi', jobCode: 'NIN', jobName: 'Ninja', calling: 'strikers', tag: 'Damage', lore: 'A shadowy master of forbidden duplication who surrounds their quarry with a fleeting retinue of striking mirror-selves.' },
-      { name: 'Nightblade', jobCode: 'NIN', jobName: 'Ninja', calling: 'tacticians', tag: 'Support', lore: 'A vigilant watcher of the unseen clan who reads an enemy’s smallest tell and seals away looming danger with swift hand-signs.' },
-
-      // DRG — Dragoon
-      { name: 'Skyborn', jobCode: 'DRG', jobName: 'Dragoon', calling: 'vanguard', tag: 'Tank', lore: 'A proud lance-knight of the high crags who takes to the wind at the decisive heartbeat, descending with thunderous presence to command the field.' },
-      { name: 'Lancer', jobCode: 'DRG', jobName: 'Dragoon', calling: 'strikers', tag: 'Damage', lore: 'A fearless spearhead who measures the open ground and surges across the battlefield in a devastating vaulted charge.' },
-      { name: 'Wyvernheart', jobCode: 'DRG', jobName: 'Dragoon', calling: 'tacticians', tag: 'Combat Healer', lore: 'A dragon-bonded guardian whose kinship with a living wyvern channels soaring vitality and restorative breath to allies in peril.' },
-
-      // SMN — Summoner
-      { name: 'Primalist', jobCode: 'SMN', jobName: 'Summoner', calling: 'strikers', tag: 'Damage', lore: 'An avatar-channeler attuned to the shifting elements who invokes celestial fury when the winds of elemental allegiance align.' },
-      { name: 'Celestial', jobCode: 'SMN', jobName: 'Summoner', calling: 'tacticians', tag: 'Healer', lore: 'A serene pact-keeper who calls down starlit avatars to weave tranquil sanctuaries of comfort and celestial grace.' },
-      { name: 'Herald', jobCode: 'SMN', jobName: 'Summoner', calling: 'tacticians', tag: 'Support', lore: 'A voice of the astral accords who announces an avatar’s elemental chorus, uniting allies in a shared symphony of planar power.' },
-
-      // BLU — Blue Mage
-      { name: 'Azure Bastion', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'vanguard', tag: 'Tank', lore: 'An Immortal sentinel who tempers body and spirit with assimilated monstrous resilience, adapting their carapace to every peril.' },
-      { name: 'Warmage', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'strikers', tag: 'Damage', lore: 'A calculating student of bestial lore who curates an arsenal of stolen monster arts to answer any foe’s defenses.' },
-      { name: 'Magus', jobCode: 'BLU', jobName: 'Blue Mage', calling: 'tacticians', tag: 'Combat Healer', lore: 'A twin-bladed alchemist of azure essence whose fluid strikes and esoteric chants ripple outward in waves of renewal.' },
-
-      // COR — Corsair
-      { name: 'Buccaneer', jobCode: 'COR', jobName: 'Corsair', calling: 'vanguard', tag: 'Tank', lore: 'A swaggering cutlass-and-pistol privateer who thrives at point-blank range, turning black-powder bravado into hardened resolve.' },
-      { name: 'Flintlock', jobCode: 'COR', jobName: 'Corsair', calling: 'strikers', tag: 'Damage', lore: 'A relentless gunslinger of sea-salt and smoke who unleashes disciplined volleys of blazing shot across the deck.' },
-      { name: 'Gambler', jobCode: 'COR', jobName: 'Corsair', calling: 'tacticians', tag: 'Support', lore: 'A daring fortune-weaver of ivory dice and phantom cards who steadies the crew’s luck while flirting with audacious wagers.' },
-
-      // PUP — Puppetmaster
-      { name: 'Vanguard', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'vanguard', tag: 'Tank', lore: 'A master artisan commanding an armored Valoredge automaton, directing clockwork valor to stand immovable before towering foes.' },
-      { name: 'Pugilist', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'strikers', tag: 'Damage', lore: 'A kinetic fighter who boxes in tight synchronization with a finely tuned frame, turning master and machine into a seamless duo.' },
-      { name: 'Animist', jobCode: 'PUP', jobName: 'Puppetmaster', calling: 'tacticians', tag: 'Combat Healer', lore: 'A compassionate alchemist-mechanic who guides a restorative automaton with subtle elemental signals to mend and shelter allies.' },
-
-      // DNC — Dancer
-      { name: 'Mirage Sentinel', jobCode: 'DNC', jobName: 'Dancer', calling: 'vanguard', tag: 'Tank', lore: 'A mesmerizing troupe-guardian whose whirling twin daggers and fan-lit footwork lure strikes into graceful, dazzling deflections.' },
-      { name: 'Bladewheel', jobCode: 'DNC', jobName: 'Dancer', calling: 'strikers', tag: 'Damage', lore: 'An acrobatic skirmisher of spinning chakrams who keeps the rhythm of the dance alive from beyond the crush of steel.' },
-      { name: 'Vampire', jobCode: 'DNC', jobName: 'Dancer', calling: 'tacticians', tag: 'Combat Healer', lore: 'A velvet-cloaked reveler of crimson waltzes who siphons vitality from the heat of combat to sustain every partner on the floor.' },
-
-      // SCH — Scholar
-      { name: 'Sage', jobCode: 'SCH', jobName: 'Scholar', calling: 'strikers', tag: 'Damage', lore: 'A learned elemental theorist accompanied by a fierce fae spirit, inscribing enduring arcane equations across protracted battles.' },
-      { name: 'Medic', jobCode: 'SCH', jobName: 'Scholar', calling: 'tacticians', tag: 'Healer', lore: 'A field-academy physician guided by luminous grimoires and a gentle fae companion, tending weary ranks with calm precision.' },
-      { name: 'Archivist', jobCode: 'SCH', jobName: 'Scholar', calling: 'tacticians', tag: 'Support', lore: 'A meticulous chronicler of monster lore who studies a foe’s signature habits and drafts tailored countermeasures on the parchment of battle.' },
-
-      // GEO — Geomancer
-      { name: 'Terramancer', jobCode: 'GEO', jobName: 'Geomancer', calling: 'strikers', tag: 'Damage', lore: 'A seismic mystic who listens to the deep pulse beneath the crust, calling forth sudden earthen upheavals along shifting fault lines.' },
-      { name: 'Verdant', jobCode: 'GEO', jobName: 'Geomancer', calling: 'tacticians', tag: 'Healer', lore: 'A gentle steward of living ley-lines who plants blooming luopan sanctuaries where weary travelers gather to be made whole.' },
-      { name: 'Diviner', jobCode: 'GEO', jobName: 'Geomancer', calling: 'tacticians', tag: 'Support', lore: 'A geomantic wayfinder who traces luminous ley-corridors across the terrain, empowering allies who hold the sacred line.' },
-
-      // RUN — Rune Fencer
-      { name: 'Inquisitor', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'vanguard', tag: 'Tank', lore: 'A stern sentinel of the Sacred City’s arcane traditions who shifts effortlessly between honed swordplay and shimmering runic wards.' },
-      { name: 'Spellblade', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'strikers', tag: 'Damage', lore: 'A greatsword-wielding conduit who etches glowing runes along steel, unleashing conducted elemental brilliance in decisive strokes.' },
-      { name: 'Lifebinder', jobCode: 'RUN', jobName: 'Rune Fencer', calling: 'tacticians', tag: 'Healer', lore: 'A frontline rune-mender who braids living sigils into restorative pulses, renewing embattled allies amid the clash of arms.' },
-    ];
-
-    const classicJobsOrder = [
-      { code: 'WAR', name: 'Warrior' },
-      { code: 'MNK', name: 'Monk' },
-      { code: 'WHM', name: 'White Mage' },
-      { code: 'BLM', name: 'Black Mage' },
-      { code: 'RDM', name: 'Red Mage' },
-      { code: 'THF', name: 'Thief' },
-      { code: 'PLD', name: 'Paladin' },
-      { code: 'DRK', name: 'Dark Knight' },
-      { code: 'BST', name: 'Beastmaster' },
-      { code: 'BRD', name: 'Bard' },
-      { code: 'RNG', name: 'Ranger' },
-      { code: 'SAM', name: 'Samurai' },
-      { code: 'NIN', name: 'Ninja' },
-      { code: 'DRG', name: 'Dragoon' },
-      { code: 'SMN', name: 'Summoner' },
-      { code: 'BLU', name: 'Blue Mage' },
-      { code: 'COR', name: 'Corsair' },
-      { code: 'PUP', name: 'Puppetmaster' },
-      { code: 'DNC', name: 'Dancer' },
-      { code: 'SCH', name: 'Scholar' },
-      { code: 'GEO', name: 'Geomancer' },
-      { code: 'RUN', name: 'Rune Fencer' },
-    ];
-
-    let activeCallingKey = 'vanguard';
-    let activeShardTag = 'All';
-    let shardViewMode = 'calling'; // 'calling' | 'jobs'
-
-    function selectCalling(key) {
-      if (!callingsData[key]) return;
-      activeCallingKey = key;
-      activeShardTag = 'All';
-      shardViewMode = 'calling';
-      renderShardsPanel();
-    }
-
-    function setShardTag(tag) {
-      activeShardTag = tag;
-      renderShardsPanel();
-    }
-
-    function setShardViewMode(mode) {
-      shardViewMode = mode;
-      renderShardsPanel();
-    }
-
-    function renderSoulCard(soul) {
-      const callingMeta = callingsData[soul.calling];
-      return `
-        <article class="rounded-xl bg-abyss/80 border border-stoneIvory/12 ${callingMeta.cardHover} p-4 sm:p-5 transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-slateSilver/90">
-                ${soul.jobName}
-              </span>
-              <span class="font-mono text-[10px] tracking-[0.12em] uppercase px-2.5 py-0.5 rounded-full border ${callingMeta.chipClass}">
-                ${soul.tag}
-              </span>
-            </div>
-            <h4 class="font-cinzel font-bold text-base tracking-[0.07em] text-stoneIvory mb-2">
-              ${soul.name}
-            </h4>
-            <p class="text-xs sm:text-[13px] text-slateSilver leading-relaxed">
-              ${soul.lore}
-            </p>
-          </div>
-        </article>
-      `;
-    }
-
-    function renderShardsPanel() {
-      const data = callingsData[activeCallingKey];
-      if (!data) return;
-
-      document.querySelectorAll('.calling-tab').forEach((btn) => {
-        const isCurrent = shardViewMode === 'calling' && btn.getAttribute('data-calling') === activeCallingKey;
-        btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
-        if (isCurrent) {
-          btn.className = `calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer ${data.toneBorder}`;
-        } else {
-          btn.className =
-            'calling-tab p-5 rounded-xl border text-left transition-all cursor-pointer border-stoneIvory/12 bg-midnight/75 hover:border-stoneIvory/30';
-        }
-      });
-
-      const panel = document.getElementById('calling-preview-panel');
-
-      if (shardViewMode === 'jobs') {
-        const jobsHtml = classicJobsOrder.map((job) => {
-          const branches = sixtySixSouls.filter((s) => s.jobCode === job.code);
-          return `
-            <div class="rounded-xl bg-midnight/70 border border-stoneIvory/12 p-4 sm:p-5">
-              <div class="flex items-center justify-between gap-2 pb-3 mb-3.5 border-b border-stoneIvory/10">
-                <h4 class="font-cinzel font-bold text-base sm:text-lg tracking-[0.08em] text-stoneIvory">${job.name}</h4>
-                <span class="font-mono text-[10px] tracking-[0.16em] uppercase text-slateSilver/75">3 Shards</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-                ${branches.map((soul) => renderSoulCard(soul)).join('')}
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        panel.innerHTML = `
-          <div class="fade-swap">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 mb-6 border-b border-stoneIvory/10">
-              <div class="max-w-2xl">
-                <span class="inline-block font-mono text-[10px] tracking-[0.22em] uppercase px-3 py-1 rounded-full border mb-3 text-aether-gold bg-aether-gold/12 border-aether-gold/30">
-                  Complete Compendium &bull; 22 Classic Jobs &bull; 66 Shards
-                </span>
-                <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.1em] uppercase text-ivory-gold mb-2">
-                  All Twenty-Two Lineages
-                </h3>
-                <p class="text-sm text-slateSilver leading-relaxed">
-                  Every classic Vana’diel job branches into three distinct thematic identities across the Three Great Callings.
-                </p>
-              </div>
-              <div class="flex flex-wrap items-center gap-2">
-                <button type="button" onclick="setShardViewMode('calling')"
-                  class="px-3.5 py-2 rounded-lg border border-stoneIvory/15 bg-abyss/80 text-slateSilver hover:text-stoneIvory hover:border-stoneIvory/35 font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
-                  By Calling
-                </button>
-                <button type="button" onclick="setShardViewMode('jobs')"
-                  class="px-3.5 py-2 rounded-lg border border-aether-gold/50 bg-aether-gold/12 text-aether-gold font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
-                  All 22 Jobs (66)
-                </button>
-              </div>
-            </div>
-
-            <div class="space-y-4">
-              ${jobsHtml}
-            </div>
-
-            <div class="mt-6 pt-5 border-t border-stoneIvory/10 flex items-start gap-2.5">
-              <span class="mt-1 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
-              <p class="font-mono text-[11px] text-slateSilver/85 leading-relaxed">
-                Living Design: Archetypes, themes, and worldbuilding evolve continuously alongside our player community.
-              </p>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      const callingSouls = sixtySixSouls.filter((s) => s.calling === activeCallingKey);
-      const filteredSouls =
-        activeShardTag === 'All'
-          ? callingSouls
-          : callingSouls.filter((s) => s.tag === activeShardTag);
-
-      const tagButtonsHtml =
-        data.tags.length > 2
-          ? `<div class="flex flex-wrap items-center gap-2">
-              ${data.tags.map((tag) => {
-                const count = tag === 'All' ? callingSouls.length : callingSouls.filter((s) => s.tag === tag).length;
-                const isSelected = activeShardTag === tag;
-                const cls = isSelected
-                  ? `${data.chipClass} font-semibold`
-                  : 'border-stoneIvory/12 bg-abyss/75 text-slateSilver hover:text-stoneIvory hover:border-stoneIvory/30';
-                return `
-                  <button type="button" onclick="setShardTag('${tag}')"
-                    class="px-3 py-1.5 rounded-full border font-mono text-[10px] tracking-[0.14em] uppercase transition-all cursor-pointer ${cls}">
-                    ${tag} (${count})
-                  </button>
-                `;
-              }).join('')}
-            </div>`
-          : `<span class="font-mono text-[10px] tracking-[0.16em] uppercase px-3 py-1.5 rounded-full border ${data.chipClass}">
-              Damage (${callingSouls.length})
-            </span>`;
-
-      panel.innerHTML = `
-        <div class="fade-swap">
-          <!-- Calling Overview Header -->
-          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 mb-6 border-b border-stoneIvory/10">
-            <div class="max-w-3xl">
-              <span class="inline-block font-mono text-[10px] tracking-[0.22em] uppercase px-3 py-1 rounded-full border mb-3.5 ${data.badgeClass}">
-                ${data.badge}
-              </span>
-              <h3 class="font-cinzel font-bold text-2xl sm:text-3xl tracking-[0.1em] uppercase text-ivory-gold mb-3">
-                ${data.title}
-              </h3>
-              <p class="text-sm sm:text-base text-slateSilver leading-relaxed mb-4">
-                ${data.fantasy}
-              </p>
-              <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stoneMuted">
-                <span class="inline-flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full ${data.accentDot}"></span>
-                  <span>Thematic Identity: <strong class="text-stoneIvory font-medium">${data.roleFocus}</strong></span>
-                </span>
-                <span class="font-mono text-[11px] text-slateSilver/80">
-                  Showing ${filteredSouls.length} of ${callingSouls.length} Shards
-                </span>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2 shrink-0">
-              <button type="button" onclick="setShardViewMode('calling')"
-                class="px-3.5 py-2 rounded-lg border font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer ${data.chipClass}">
-                By Calling
-              </button>
-              <button type="button" onclick="setShardViewMode('jobs')"
-                class="px-3.5 py-2 rounded-lg border border-stoneIvory/15 bg-abyss/80 text-slateSilver hover:text-stoneIvory hover:border-aether-gold/45 font-mono text-[11px] tracking-[0.14em] uppercase transition-all cursor-pointer">
-                All 22 Jobs (66)
-              </button>
-            </div>
-          </div>
-
-          <!-- Tag Filter Bar -->
-          <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
-            <span class="font-mono text-[10px] tracking-[0.22em] uppercase text-slateSilver">
-              Filter by Tag Category
-            </span>
-            ${tagButtonsHtml}
-          </div>
-
-          <!-- Shards Roster Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
-            ${filteredSouls.map((soul) => renderSoulCard(soul)).join('')}
-          </div>
-
-          <!-- Living Design Footer Note -->
-          <div class="pt-4 border-t border-stoneIvory/10 flex items-start gap-2.5">
-            <span class="mt-1 w-2 h-2 rotate-45 bg-aether-cyan shrink-0"></span>
-            <p class="font-mono text-[11px] text-slateSilver/85 leading-relaxed">
-              Living Design: Archetypes, themes, and worldbuilding evolve continuously alongside our player community.
-            </p>
-          </div>
-        </div>
-      `;
-    }
 
     /* -----------------------------------------------------------------------
        6. MOBILE PERSPECTIVE TOGGLE (NEWCOMER VS. VETERAN)
@@ -1616,7 +1306,6 @@
       resizeAetherCanvas();
       animateAether();
       selectCrag('holla');
-      selectCalling('vanguard');
       document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
     };
 
@@ -1627,5 +1316,6 @@
       }
     });
   </script>
+  <script src="./assets/soulspire-data.js?v=1"></script>
 </body>
 </html>
