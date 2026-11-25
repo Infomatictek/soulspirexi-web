@@ -207,6 +207,11 @@
       border: 1px solid rgba(52, 211, 153, 0.35);
       color: #D1FAE5;
     }
+    .alert-warn {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FDE68A;
+    }
 
     .btn {
       width: 100%;
@@ -351,6 +356,23 @@
         </a>
       </div>
 
+      <!-- Registration Service Temporarily Unavailable State -->
+      <div id="stateUnavailable" class="hidden">
+        <h1>Registration Service Temporarily Unavailable</h1>
+        <p class="subtitle">
+          We could not verify the current alpha registration status right now. Account creation is temporarily paused until the service reconnects.
+        </p>
+        <div class="alert alert-warn visible" role="alert">
+          This does not mean registration has been closed, and existing SoulspireXI accounts are unaffected. This page checks automatically every few seconds.
+        </div>
+        <button id="retryStatusBtn" type="button" class="btn btn-primary">
+          Check Registration Status Again
+        </button>
+        <a class="btn btn-secondary" href="https://wiki.soulspirexi.com" target="_blank" rel="noopener">
+          Explore the Player Wiki
+        </a>
+      </div>
+
       <!-- Registration Form State -->
       <div id="stateForm" class="hidden">
         <h1>Create Alpha Account</h1>
@@ -470,14 +492,18 @@
         : '';
       const STATUS_URL = API_BASE + '/api/combat/public/register/status';
       const REGISTER_URL = API_BASE + '/api/combat/public/register';
+      const STATUS_POLL_MS = 4000;
+      const STATUS_TIMEOUT_MS = 6000;
       const USERNAME_RE = /^[A-Za-z][A-Za-z0-9_]{3,14}$/;
 
       const elLoading = document.getElementById('stateLoading');
       const elClosed = document.getElementById('stateClosed');
+      const elUnavailable = document.getElementById('stateUnavailable');
       const elForm = document.getElementById('stateForm');
       const elSuccess = document.getElementById('stateSuccess');
       const elAlert = document.getElementById('formAlert');
       const elCreatedUser = document.getElementById('createdUsername');
+      const retryStatusBtn = document.getElementById('retryStatusBtn');
 
       const form = document.getElementById('registerForm');
       const inviteIn = document.getElementById('inviteCode');
@@ -486,8 +512,13 @@
       const confirmIn = document.getElementById('confirmPassword');
       const submitBtn = document.getElementById('submitBtn');
 
-      function showState(target) {
-        [elLoading, elClosed, elForm, elSuccess].forEach((el) => el.classList.add('hidden'));
+      let currentState = 'loading';
+      let pollTimer = null;
+      let statusInFlight = false;
+
+      function showState(target, name) {
+        currentState = name;
+        [elLoading, elClosed, elUnavailable, elForm, elSuccess].forEach((el) => el.classList.add('hidden'));
         target.classList.remove('hidden');
       }
 
@@ -508,19 +539,62 @@
         inviteIn.value = prefillCode.toUpperCase();
       }
 
-      async function checkStatus() {
+      function stopStatusPolling() {
+        if (pollTimer !== null) {
+          window.clearInterval(pollTimer);
+          pollTimer = null;
+        }
+      }
+
+      async function checkStatus(opts) {
+        const manual = Boolean(opts && opts.manual);
+        if (currentState === 'success') {
+          stopStatusPolling();
+          return;
+        }
+        if (statusInFlight) return;
+        if (manual) {
+          showState(elLoading, 'loading');
+        }
+        statusInFlight = true;
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timeoutId = controller
+          ? window.setTimeout(() => controller.abort(), STATUS_TIMEOUT_MS)
+          : null;
         try {
-          const res = await fetch(STATUS_URL, { cache: 'no-store' });
-          if (!res.ok) throw new Error('status_unavailable');
+          const url = STATUS_URL + (STATUS_URL.indexOf('?') === -1 ? '?' : '&') + '_t=' + Date.now();
+          const res = await fetch(url, {
+            method: 'GET',
+            cache: 'no-store',
+            headers: { Accept: 'application/json' },
+            signal: controller ? controller.signal : undefined,
+          });
+          if (!res.ok) throw new Error('status_http_' + res.status);
           const data = await res.json();
-          if (data && data.registration_open === true) {
-            showState(elForm);
+          if (!data || typeof data.registration_open !== 'boolean') {
+            throw new Error('status_invalid_schema');
+          }
+          if (data.registration_open === true) {
+            if (currentState !== 'open') {
+              showState(elForm, 'open');
+            }
           } else {
-            showState(elClosed);
+            if (currentState !== 'closed') {
+              showState(elClosed, 'closed');
+            }
           }
         } catch (_) {
-          showState(elClosed);
+          if (currentState !== 'unavailable') {
+            showState(elUnavailable, 'unavailable');
+          }
+        } finally {
+          if (timeoutId !== null) window.clearTimeout(timeoutId);
+          statusInFlight = false;
         }
+      }
+
+      if (retryStatusBtn) {
+        retryStatusBtn.addEventListener('click', () => checkStatus({ manual: true }));
       }
 
       form.addEventListener('submit', async (ev) => {
@@ -559,7 +633,8 @@
         try {
           const res = await fetch(REGISTER_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ invite_code, username, password, confirm_password }),
           });
           const data = await res.json().catch(() => ({}));
@@ -567,23 +642,42 @@
             passIn.value = '';
             confirmIn.value = '';
             elCreatedUser.textContent = data.username || username;
-            showState(elSuccess);
+            stopStatusPolling();
+            showState(elSuccess, 'success');
             return;
           }
           if (res.status === 403 && data.error === 'registration_closed') {
-            showState(elClosed);
+            showState(elClosed, 'closed');
+            return;
+          }
+          if (res.status >= 500) {
+            showError(
+              data.message ||
+                'Registration service is temporarily unavailable. Your invitation code was not consumed; please try again shortly.'
+            );
             return;
           }
           showError(data.message || 'Unable to complete registration. Please check your details and try again.');
         } catch (_) {
-          showError('Could not reach the registration service. Please try again shortly.');
+          showError('Registration service is temporarily unavailable. Please try again shortly.');
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Create Game Account';
         }
       });
 
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && currentState !== 'success') {
+          checkStatus();
+        }
+      });
+
       checkStatus();
+      pollTimer = window.setInterval(() => {
+        if (document.visibilityState !== 'hidden' && currentState !== 'success') {
+          checkStatus();
+        }
+      }, STATUS_POLL_MS);
     })();
   </script>
 </body>
