@@ -12,7 +12,7 @@ This repository follows the canonical SoulspireXI governance contract in **`Info
 ## Repository Role & Canonical Rules
 
 - **Canonical Branch:** `main` (`https://soulspirexi.com` static frontend & `/register` page).
-- **Public Data Boundary (`DEC-013`, `DEC-014`):** Consume Public Game Data API v1 (`/api/v1/*.json` via `assets/soulspire-data.js`) sourced from `Infomatictek/soulspirexi` `main`. Never hardcode Soul/job arrays in HTML or publish internal formulas, credentials, admin endpoints, or non-public repo files (`AGENTS.md`, `tests/`, `scripts/`).
+- **Public Data Boundary & Canonical Namespace (`DEC-013`, `DEC-014`, `DEC-033` / `BRAND-001`):** Consume Public Game Data API v1 (`/api/v1/*.json` via `assets/soulspire-data.js`) sourced from `Infomatictek/soulspirexi` `main`. Never hardcode Soul/job arrays in HTML or publish internal formulas, credentials, admin endpoints, or non-public repo files (`AGENTS.md`, `tests/`, `scripts/`). Never introduce deprecated `OverlordsXI`, `Overlords`, `OVERLORDS_*`, `ox_combat_session`, or legacy `OX*` identifiers (enforced by `scripts/validate-web-assets.py`).
 - **Deployment Mechanism:** Publish only checksum-verified bundles built by `scripts/validate-web-assets.py` via `scripts/deploy-web-vps.sh` (or `.github/workflows/sync-and-deploy-web.yml`), never exposing non-public repo files in the public webroot.
 - **Mandatory Local Checks Before Push:**
   - `node --check assets/soulspire-data.js`

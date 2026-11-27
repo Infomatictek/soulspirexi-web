@@ -183,6 +183,10 @@ def validate_web(web_dir: Path) -> tuple[list[str], list[str]]:
                 for bk in _scan_forbidden_keys(payload, f"$.{name}")[:10]:
                     errors.append(f"Forbidden internal key in api/v1/{name}.json: {bk}")
 
+    legacy_ns_re = re.compile(
+        r"\b(overlords?xi|overlords|overlords_[a-z0-9_]+|ox_combat_session|OXHD|OXHUD|OXMOB|OXTAL|OXBST|OXTL|OXKE|OXSI)\b",
+        re.IGNORECASE,
+    )
     owned = collect_owned_files(web_dir)
     for rel in owned:
         fpath = web_dir / rel
@@ -191,6 +195,9 @@ def validate_web(web_dir: Path) -> tuple[list[str], list[str]]:
             for label, pat in FORBIDDEN_SECRET_PATTERNS:
                 if pat.search(txt):
                     errors.append(f"Forbidden secret pattern ({label}) in {rel}")
+            ns_hits = sorted({m.group(0) for m in legacy_ns_re.finditer(txt)})
+            if ns_hits:
+                errors.append(f"BRAND-001 legacy namespace identifier(s) ({', '.join(ns_hits)}) in public web asset {rel}")
 
     return errors, owned
 
