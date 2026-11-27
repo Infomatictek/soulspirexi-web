@@ -168,6 +168,30 @@ def validate_web(web_dir: Path) -> tuple[list[str], list[str]]:
 
             if "jobs" in loaded and len(loaded["jobs"].get("jobs") or []) != 22:
                 errors.append(f"Expected 22 jobs in api/v1/jobs.json, got {len(loaded['jobs'].get('jobs') or [])}")
+
+            if "systems" in loaded:
+                forbidden_public_cmds = {
+                    "!kurogane",
+                    "!tester",
+                    "!build",
+                    "!combat",
+                    "!bossstance",
+                    "!gear",
+                    "!camp",
+                    "!camps",
+                    "!starterkit",
+                    "!weapons",
+                    "!startershop",
+                    "!talent",
+                    "!soulhud",
+                    "!!soulhud",
+                    "!weapons / !starterkit / !combat",
+                }
+                for cmd in loaded["systems"].get("commands") or []:
+                    if isinstance(cmd, dict):
+                        cname = str(cmd.get("command") or "").strip().lower()
+                        if cname in forbidden_public_cmds:
+                            errors.append(f"Forbidden restricted/internal command '{cname}' present in api/v1/systems.json")
             if "souls" in loaded:
                 souls = loaded["souls"].get("souls") or []
                 if len(souls) != 66:
